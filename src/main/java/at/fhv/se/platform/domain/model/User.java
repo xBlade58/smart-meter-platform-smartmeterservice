@@ -8,10 +8,10 @@ import jakarta.persistence.Id;
  * 16.11.2023
  */
 
-@Entity
+//@Entity
 public class User {
 
-    @Id
+//    @Id
     private String id;
     private String firstName;
     private String lastName;

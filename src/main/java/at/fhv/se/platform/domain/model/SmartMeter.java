@@ -14,4 +14,19 @@ public class SmartMeter {
     @Id
     private String id;
     private String manufacturer;
+
+    public SmartMeter(){}
+
+    public SmartMeter(String id, String manufacturer) {
+        this.id = id;
+        this.manufacturer = manufacturer;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getManufacturer() {
+        return manufacturer;
+    }
 }
