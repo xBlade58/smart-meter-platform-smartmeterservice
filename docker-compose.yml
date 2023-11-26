@@ -25,7 +25,7 @@ services:
       - 18084:18083
 
   timescaledb:
-    image: timescale/timescaledb:latest-pg12
+    image: timescale/timescaledb:latest-pg14
     ports:
       - 5432:5432
     environment:
@@ -34,7 +34,7 @@ services:
       POSTGRES_PASSWORD: adnim
     volumes:
       - ./src/main/resources/schemas.sql:/docker-entrypoint-initdb.d/schemas.sql
-      - timescaledb_volume:/var/lib/postgresql/data
+      
     networks:
       my-bridge-network:
         aliases:
@@ -47,4 +47,4 @@ networks:
     external: true
 
 volumes:
-  timescaledb_volume:
+  pg_admin_data:

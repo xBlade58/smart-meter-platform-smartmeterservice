@@ -20,7 +20,7 @@ public class SmartMeterServiceImpl implements SmartMeterService{
     private SmartMeterRepository smartMeterRepository;
 
     @Override
-    public String createSmartMeter(String id, String manufacturer) {
+    public int createSmartMeter(int id, String manufacturer) {
         SmartMeter smartMeter = new SmartMeter(id, manufacturer);
         this.smartMeterRepository.save(smartMeter);
         return id;

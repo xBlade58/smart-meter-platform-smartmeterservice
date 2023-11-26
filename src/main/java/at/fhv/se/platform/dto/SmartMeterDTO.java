@@ -6,15 +6,15 @@ package at.fhv.se.platform.dto;
  */
 
 public class SmartMeterDTO {
-    String id;
+    int id;
     String manufacturer;
 
-    public SmartMeterDTO(String id, String manufacturer) {
+    public SmartMeterDTO(int id, String manufacturer) {
         this.id = id;
         this.manufacturer = manufacturer;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 

@@ -21,7 +21,7 @@ public class MeterReadingServiceImpl implements MeterReadingService {
 
     @Override
     public String createMeterReading(MeterReadingDTO meterReadingDTO) {
-        MeterReading meterReading = new MeterReading(meterReadingDTO.getTimestamp(),
+        MeterReading meterReading = new MeterReading(meterReadingDTO.getTimestamp(), meterReadingDTO.getSmartMeterId(),
                 meterReadingDTO.getPosActInstPower(), meterReadingDTO.getPosActEnergyTotal(),
                 meterReadingDTO.getNegActInstPower(), meterReadingDTO.getNegActEnergyTotal(),
                 meterReadingDTO.getPosReactEnergyTotal(), meterReadingDTO.getNegReactEnergyTotal(),
@@ -37,12 +37,13 @@ public class MeterReadingServiceImpl implements MeterReadingService {
         List<MeterReading> meterReadings = this.meterReadingRepository.findAll();
         return meterReadings.stream().map(meterReading -> new MeterReadingDTO(
                 meterReading.getTimestamp(),
+                meterReading.getSmartMeterId(),
                 meterReading.getPosActInstPower(), meterReading.getPosActEnergyTotal(),
                 meterReading.getNegActInstPower(), meterReading.getNegActEnergyTotal(),
                 meterReading.getPosReactEnergyTotal(), meterReading.getNegReactEnergyTotal(),
-                meterReading.getSumActInstantPower(), meterReading.getInstCurrL1(),
-                meterReading.getInstVoltL1(), meterReading.getInstCurrL2(), meterReading.getInstVoltL2(),
-                meterReading.getInstCurrL3(), meterReading.getInstVoltL3()
+                meterReading.getSumActInstantPower(), meterReading.getInstCurr_l1(),
+                meterReading.getInstVolt_l1(), meterReading.getInstCurr_l2(), meterReading.getInstVolt_l2(),
+                meterReading.getInstCurr_l3(), meterReading.getInstVolt_l3()
         )).toList();
     }
 }

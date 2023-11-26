@@ -9,6 +9,7 @@ import java.sql.Timestamp;
 
 public class MeterReadingDTO {
     private Timestamp timestamp;
+    private int smartMeterId;
     private int posActInstPower; // 1.7.0
     private int posActEnergyTotal; // 1.8.0
     private int negActInstPower; // 2.7.0
@@ -16,18 +17,19 @@ public class MeterReadingDTO {
     private int posReactEnergyTotal; // 3.8.0
     private int negReactEnergyTotal; // 4.8.0
     private int sumActInstantPower; // 16.7.0
-    private double instCurrL1; // 31.7.0
-    private double instVoltL1; // 32.7.0
-    private double instCurrL2; // 51.7.0
-    private double instVoltL2; // 52.7.0
-    private double instCurrL3; // 71.7.0
-    private double instVoltL3; // 72.7.0
+    private float instCurrL1; // 31.7.0
+    private float instVoltL1; // 32.7.0
+    private float instCurrL2; // 51.7.0
+    private float instVoltL2; // 52.7.0
+    private float instCurrL3; // 71.7.0
+    private float instVoltL3; // 72.7.0
 
-    public MeterReadingDTO(Timestamp timestamp, int posActInstPower, int posActEnergyTotal, int negActInstPower,
+    public MeterReadingDTO(Timestamp timestamp, int smartMeterId, int posActInstPower, int posActEnergyTotal, int negActInstPower,
                            int negActEnergyTotal, int posReactEnergyTotal, int negReactEnergyTotal,
-                           int sumActInstantPower, double instCurrL1, double instVoltL1, double instCurrL2,
-                           double instVoltL2, double instCurrL3, double instVoltL3) {
+                           int sumActInstantPower, float instCurrL1, float instVoltL1, float instCurrL2,
+                           float instVoltL2, float instCurrL3, float instVoltL3) {
         this.timestamp = timestamp;
+        this.smartMeterId = smartMeterId;
         this.posActInstPower = posActInstPower;
         this.posActEnergyTotal = posActEnergyTotal;
         this.negActInstPower = negActInstPower;
@@ -75,27 +77,31 @@ public class MeterReadingDTO {
         return sumActInstantPower;
     }
 
-    public double getInstCurrL1() {
+    public float getInstCurrL1() {
         return instCurrL1;
     }
 
-    public double getInstVoltL1() {
+    public float getInstVoltL1() {
         return instVoltL1;
     }
 
-    public double getInstCurrL2() {
+    public float getInstCurrL2() {
         return instCurrL2;
     }
 
-    public double getInstVoltL2() {
+    public float getInstVoltL2() {
         return instVoltL2;
     }
 
-    public double getInstCurrL3() {
+    public float getInstCurrL3() {
         return instCurrL3;
     }
 
-    public double getInstVoltL3() {
+    public float getInstVoltL3() {
         return instVoltL3;
+    }
+    
+    public int getSmartMeterId(){
+        return smartMeterId;
     }
 }

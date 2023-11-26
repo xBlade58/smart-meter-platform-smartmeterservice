@@ -10,7 +10,7 @@ import java.util.List;
  */
 
 public interface SmartMeterService {
-    String createSmartMeter(String id, String manufacturer);
+    int createSmartMeter(int id, String manufacturer);
     List<SmartMeterDTO> getAllSmartMeters();
 
 }

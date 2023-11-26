@@ -12,17 +12,17 @@ import jakarta.persistence.Id;
 public class SmartMeter {
 
     @Id
-    private String id;
+    private int id;
     private String manufacturer;
 
     public SmartMeter(){}
 
-    public SmartMeter(String id, String manufacturer) {
+    public SmartMeter(int id, String manufacturer) {
         this.id = id;
         this.manufacturer = manufacturer;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
