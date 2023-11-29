@@ -1,4 +1,4 @@
-package at.fhv.se.platform.domain.model;
+package at.fhv.se.platform.model;
 
 /**
  * @author Justin Ströhle

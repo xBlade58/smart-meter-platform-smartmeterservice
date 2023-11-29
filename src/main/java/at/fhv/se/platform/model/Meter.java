@@ -1,4 +1,4 @@
-package at.fhv.se.platform.domain.model;
+package at.fhv.se.platform.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -9,15 +9,15 @@ import jakarta.persistence.Id;
  */
 
 @Entity
-public class SmartMeter {
+public class Meter {
 
     @Id
     private int id;
     private String manufacturer;
 
-    public SmartMeter(){}
+    public Meter(){}
 
-    public SmartMeter(int id, String manufacturer) {
+    public Meter(int id, String manufacturer) {
         this.id = id;
         this.manufacturer = manufacturer;
     }

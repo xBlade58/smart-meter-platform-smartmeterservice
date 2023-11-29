@@ -1,14 +1,11 @@
-DROP TABLE IF EXISTS SMART_METER;
-DROP TABLE IF EXISTS METER_READING;
-
-CREATE TABLE IF NOT EXISTS SMART_METER (
+CREATE TABLE IF NOT EXISTS METER (
     id SERIAL PRIMARY KEY,
     manufacturer varchar(64)
 );
 
 CREATE TABLE IF NOT EXISTS METER_READING (
     timestamp TIMESTAMPTZ NOT NULL,
-    smart_meter_id INTEGER REFERENCES SMART_METER (id),
+    meter_id INTEGER REFERENCES METER (id),
     pos_act_inst_power int,
     pos_act_energy_total int,
     neg_act_inst_power int,

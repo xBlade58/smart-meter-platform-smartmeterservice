@@ -1,4 +1,4 @@
-package at.fhv.se.platform.domain.model;
+package at.fhv.se.platform.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -14,7 +14,7 @@ import java.sql.Timestamp;
 public class MeterReading {
     @Id
     private Timestamp timestamp;
-    private int smartMeterId;
+    private int meterId;
     private int posActInstPower; // 1.7.0
     private int posActEnergyTotal; // 1.8.0
     private int negActInstPower; // 2.7.0
@@ -29,12 +29,12 @@ public class MeterReading {
     private float instCurr_l3; // 71.7.0
     private float instVolt_l3; // 72.7.0
 
-    public MeterReading(Timestamp timestamp, int smartMeterId, int posActInstPower, int posActEnergyTotal, int negActInstPower,
+    public MeterReading(Timestamp timestamp, int meterId, int posActInstPower, int posActEnergyTotal, int negActInstPower,
                         int negActEnergyTotal, int posReactEnergyTotal, int negReactEnergyTotal, int sumActInstantPower,
                         float instCurrL1, float instVoltL1, float instCurrL2, float instVoltL2, float instCurrL3,
                         float instVoltL3) {
         this.timestamp = timestamp;
-        this.smartMeterId = smartMeterId;
+        this.meterId = meterId;
         this.posActInstPower = posActInstPower;
         this.posActEnergyTotal = posActEnergyTotal;
         this.negActInstPower = negActInstPower;
@@ -109,8 +109,8 @@ public class MeterReading {
         return instVolt_l3;
     }
 
-    public int getSmartMeterId(){
-        return smartMeterId;
+    public int getMeterId(){
+        return meterId;
     }
 }
 

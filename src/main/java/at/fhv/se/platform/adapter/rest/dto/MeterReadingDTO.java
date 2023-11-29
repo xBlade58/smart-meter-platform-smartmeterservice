@@ -1,4 +1,4 @@
-package at.fhv.se.platform.dto;
+package at.fhv.se.platform.adapter.rest.dto;
 
 import java.sql.Timestamp;
 
@@ -9,7 +9,7 @@ import java.sql.Timestamp;
 
 public class MeterReadingDTO {
     private Timestamp timestamp;
-    private int smartMeterId;
+    private int meterId;
     private int posActInstPower; // 1.7.0
     private int posActEnergyTotal; // 1.8.0
     private int negActInstPower; // 2.7.0
@@ -24,12 +24,12 @@ public class MeterReadingDTO {
     private float instCurrL3; // 71.7.0
     private float instVoltL3; // 72.7.0
 
-    public MeterReadingDTO(Timestamp timestamp, int smartMeterId, int posActInstPower, int posActEnergyTotal, int negActInstPower,
+    public MeterReadingDTO(Timestamp timestamp, int meterId, int posActInstPower, int posActEnergyTotal, int negActInstPower,
                            int negActEnergyTotal, int posReactEnergyTotal, int negReactEnergyTotal,
                            int sumActInstantPower, float instCurrL1, float instVoltL1, float instCurrL2,
                            float instVoltL2, float instCurrL3, float instVoltL3) {
         this.timestamp = timestamp;
-        this.smartMeterId = smartMeterId;
+        this.meterId = meterId;
         this.posActInstPower = posActInstPower;
         this.posActEnergyTotal = posActEnergyTotal;
         this.negActInstPower = negActInstPower;
@@ -101,7 +101,7 @@ public class MeterReadingDTO {
         return instVoltL3;
     }
     
-    public int getSmartMeterId(){
-        return smartMeterId;
+    public int getMeterId(){
+        return meterId;
     }
 }

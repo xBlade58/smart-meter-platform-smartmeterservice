@@ -1,4 +1,4 @@
-package at.fhv.se.platform.infrastructure.config;
+package at.fhv.se.platform.adapter.mqtt.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

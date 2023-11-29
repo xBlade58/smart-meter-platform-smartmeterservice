@@ -34,7 +34,6 @@ services:
       POSTGRES_PASSWORD: adnim
     volumes:
       - ./src/main/resources/schemas.sql:/docker-entrypoint-initdb.d/schemas.sql
-      
     networks:
       my-bridge-network:
         aliases:
