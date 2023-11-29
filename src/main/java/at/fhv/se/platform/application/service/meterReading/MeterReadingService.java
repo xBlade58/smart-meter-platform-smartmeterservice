@@ -2,7 +2,7 @@ package at.fhv.se.platform.application.service.meterReading;
 
 import java.util.List;
 
-import at.fhv.se.platform.adapter.rest.dto.MeterReadingDTO;
+import at.fhv.se.platform.adapter.dto.MeterReadingDTO;
 import at.fhv.se.platform.application.port.inbound.meterReading.CreateMeterReadingUseCase;
 import at.fhv.se.platform.application.port.inbound.meterReading.GetAllMeterReadingsUseCase;
 import at.fhv.se.platform.application.port.outbound.persistence.MeterReadingRepository;
@@ -18,6 +18,7 @@ public class MeterReadingService implements CreateMeterReadingUseCase, GetAllMet
 
     @Override
     public String createMeterReading(MeterReadingDTO meterReadingDTO) {
+        //TODO: verify if Meter exists
         MeterReading meterReading = new MeterReading(meterReadingDTO.getTimestamp(), meterReadingDTO.getMeterId(),
                 meterReadingDTO.getPosActInstPower(), meterReadingDTO.getPosActEnergyTotal(),
                 meterReadingDTO.getNegActInstPower(), meterReadingDTO.getNegActEnergyTotal(),

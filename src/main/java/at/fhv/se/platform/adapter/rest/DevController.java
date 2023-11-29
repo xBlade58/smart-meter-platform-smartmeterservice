@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import at.fhv.se.platform.adapter.rest.dto.MeterReadingDTO;
+import at.fhv.se.platform.adapter.dto.MeterReadingDTO;
 import at.fhv.se.platform.application.port.inbound.meter.CreateMeterUseCase;
 import at.fhv.se.platform.application.port.inbound.meterReading.CreateMeterReadingUseCase;
 import at.fhv.se.platform.application.port.inbound.meterReading.GetAllMeterReadingsUseCase;
@@ -50,16 +50,24 @@ public class DevController {
     @GetMapping("/readings/getAll")
     public ResponseEntity getAllMeterReadings() {
         List<MeterReading> list = this.getAllMeterReadingsUseCase.getAll();
-        List<MeterReadingDTO> dtos = list.stream().map(meterReading -> new MeterReadingDTO(
-                meterReading.getTimestamp(),
-                meterReading.getMeterId(),
-                meterReading.getPosActInstPower(), meterReading.getPosActEnergyTotal(),
-                meterReading.getNegActInstPower(), meterReading.getNegActEnergyTotal(),
-                meterReading.getPosReactEnergyTotal(), meterReading.getNegReactEnergyTotal(),
-                meterReading.getSumActInstantPower(), meterReading.getInstCurr_l1(),
-                meterReading.getInstVolt_l1(), meterReading.getInstCurr_l2(), meterReading.getInstVolt_l2(),
-                meterReading.getInstCurr_l3(), meterReading.getInstVolt_l3()
-        )).toList();
+        List<MeterReadingDTO> dtos = list.stream().map(meterReading -> 
+        
+        MeterReadingDTO.builder()
+            .timestamp(meterReading.getTimestamp())
+            .meterId(meterReading.getMeterId())
+            .posActInstPower(meterReading.getPosActInstPower())
+            .posActEnergyTotal(meterReading.getPosActEnergyTotal())
+            .negActInstPower(meterReading.getNegActInstPower())
+            .negActEnergyTotal(meterReading.getNegActEnergyTotal())
+            .sumActInstantPower(meterReading.getSumActInstantPower())
+            .instCurrL1(meterReading.getInstCurr_l1())
+            .instVoltL1(meterReading.getInstVolt_l1())
+            .instCurrL2(meterReading.getInstCurr_l2())
+            .instVoltL2(meterReading.getInstVolt_l2())
+            .instCurrL3(meterReading.getInstVolt_l3())
+            .instVoltL3(meterReading.getInstVolt_l3())
+            .build()).toList();
+            
         return ResponseEntity.ok(dtos);
     }
 }

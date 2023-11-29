@@ -1,4 +1,4 @@
-package at.fhv.se.platform.adapter.rest.dto;
+package at.fhv.se.platform.adapter.dto;
 
 /**
  * @author Justin Ströhle

@@ -1,5 +1,6 @@
-package at.fhv.se.platform.adapter.mqtt.config;
+package at.fhv.se.platform.adapter.mqtt;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,8 +13,14 @@ import org.springframework.integration.mqtt.support.DefaultPahoMessageConverter;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.MessageHandler;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import at.fhv.se.platform.adapter.dto.MeterReadingDTO;
+import at.fhv.se.platform.application.port.inbound.meterReading.CreateMeterReadingUseCase;
+
 @Configuration
-public class MqttConfig {
+public class MqttAdapter {
 
     @Value("${mqtt.broker.url}")
     private String brokerUrl;
@@ -23,6 +30,13 @@ public class MqttConfig {
 
     @Value("${mqtt.topic}")
     private String topic;
+
+    @Autowired
+    private CreateMeterReadingUseCase createMeterReadingUseCase;
+
+    @Autowired
+    private Parser parser;
+
 
     @Bean
     public MqttPahoClientFactory mqttClientFactory() {
@@ -53,6 +67,9 @@ public class MqttConfig {
     @Bean
     @ServiceActivator(inputChannel = "mqttInputChannel")
     public MessageHandler handler() {
-        return message -> System.out.println("Received MQTT message: " + message.getPayload());
+        return (message) -> {
+            MeterReadingDTO dto = parser.parse(message);
+            createMeterReadingUseCase.createMeterReading(dto);
+        };
     }
 }
