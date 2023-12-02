@@ -13,8 +13,6 @@ import org.springframework.integration.mqtt.support.DefaultPahoMessageConverter;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.MessageHandler;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import at.fhv.se.platform.adapter.dto.MeterReadingDTO;
 import at.fhv.se.platform.application.port.inbound.meterReading.CreateMeterReadingUseCase;

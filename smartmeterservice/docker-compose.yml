@@ -44,6 +44,3 @@ networks:
   my-bridge-network:
     driver: bridge
     external: true
-
-volumes:
-  pg_admin_data:
