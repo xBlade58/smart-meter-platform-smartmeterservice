@@ -5,8 +5,8 @@ import java.sql.Timestamp;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import at.fhv.se.smartmeter.model.MeterReading;
+import at.fhv.se.smartmeter.adapter.timescaledb.mapper.MeterReadingDBEntity;
 
-public interface TimescaleJPAMeterReading extends JpaRepository<MeterReading, Timestamp> {
+public interface TimescaleJPAMeterReading extends JpaRepository<MeterReadingDBEntity, Timestamp> {
     
 }

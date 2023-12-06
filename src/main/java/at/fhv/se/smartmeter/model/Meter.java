@@ -1,18 +1,14 @@
 package at.fhv.se.smartmeter.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-
 /**
  * @author Justin Ströhle
  * 16.11.2023
  */
 
-@Entity
+
 public class Meter {
 
-    @Id
-    private int id;
+    private long id;
     private int serialNumber;
     private String manufacturer;
 
@@ -23,7 +19,7 @@ public class Meter {
         this.manufacturer = manufacturer;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 

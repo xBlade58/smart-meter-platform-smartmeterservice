@@ -1,8 +1,5 @@
 package at.fhv.se.smartmeter.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-
 import java.sql.Timestamp;
 
 /**
@@ -10,9 +7,9 @@ import java.sql.Timestamp;
  * 16.11.2023
  */
 
-@Entity
+
 public class MeterReading {
-    @Id
+    
     private Timestamp timestamp;
     private int meterId;
     private int posActInstPower; // 1.7.0

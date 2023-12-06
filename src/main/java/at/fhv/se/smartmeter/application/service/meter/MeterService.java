@@ -13,10 +13,10 @@ public class MeterService implements CreateMeterUseCase {
     }
 
     @Override
-    public int createMeter(int serialNumber, String manufacturer) {
+    public long createMeter(int serialNumber, String manufacturer) {
         Meter m = new Meter(serialNumber, manufacturer);
-        int id = meterRepo.save(m);
-        return id; //TODO: Refactor generation and usage of meterId
+        long id = meterRepo.save(m);
+        return id;
     }
     
 }
