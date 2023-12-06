@@ -13,17 +13,22 @@ public class Meter {
 
     @Id
     private int id;
+    private int serialNumber;
     private String manufacturer;
 
     public Meter(){}
 
-    public Meter(int id, String manufacturer) {
-        this.id = id;
+    public Meter(int serialNumber, String manufacturer) {
+        this.serialNumber = serialNumber;
         this.manufacturer = manufacturer;
     }
 
     public int getId() {
         return id;
+    }
+
+    public int getSerialNumber() {
+        return serialNumber;
     }
 
     public String getManufacturer() {

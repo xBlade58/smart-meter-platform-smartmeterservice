@@ -37,7 +37,8 @@ public class DevController {
 
     @GetMapping("/createNewMeter")
     public ResponseEntity createNewMeter(){
-        int r = this.createMeterService.createMeter(5, "another-tset");
+        int r = this.createMeterService.createMeter(10, "lets see");
+        int r2 = this.createMeterService.createMeter(5, "VKW");
         return ResponseEntity.ok(r);
     }
 

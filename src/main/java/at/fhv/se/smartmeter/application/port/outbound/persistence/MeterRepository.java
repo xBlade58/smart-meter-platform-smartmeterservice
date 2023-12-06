@@ -10,5 +10,5 @@ import at.fhv.se.smartmeter.model.Meter;
 
 // outbound port
 public interface MeterRepository {
-    void save(Meter meter);   
+    int save(Meter meter);   
 }

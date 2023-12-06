@@ -14,8 +14,10 @@ public class TimescaleMeterRepository implements MeterRepository {
     
 
     @Override
-    public void save(Meter meter) {
-        this.meterJPARepo.save(meter);
+    public int save(Meter meter) {
+        Meter savedMeter = this.meterJPARepo.save(meter);
+        System.out.println(savedMeter.getId());
+        return savedMeter.getId();
     }
 
 }

@@ -1,5 +1,6 @@
 CREATE TABLE IF NOT EXISTS METER (
     id SERIAL PRIMARY KEY,
+    serial_number int,
     manufacturer varchar(64)
 );
 
