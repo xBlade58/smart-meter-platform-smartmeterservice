@@ -1,6 +1,7 @@
 package at.fhv.se.smartmeter.adapter.timescaledb.mapper;
 
-import jakarta.persistence.Column;
+import java.util.UUID;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -10,9 +11,9 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "meter")
 public class MeterDBEntity {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID id;
     private int serialNumber;
     private String manufacturer;
 
@@ -21,7 +22,7 @@ public class MeterDBEntity {
         this.manufacturer = manufacturer;
     }
 
-    public long getId() {
+    public UUID getId() {
         return id;
     }
 
@@ -33,7 +34,7 @@ public class MeterDBEntity {
         return manufacturer;
     }
 
-    public void setId(long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

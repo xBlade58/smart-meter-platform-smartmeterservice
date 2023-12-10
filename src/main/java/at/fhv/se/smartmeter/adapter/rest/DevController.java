@@ -37,8 +37,8 @@ public class DevController {
 
     @GetMapping("/createNewMeter")
     public ResponseEntity createNewMeter(){
-        long r = this.createMeterService.createMeter(10, "lets see");
-        long r2 = this.createMeterService.createMeter(5, "VKW");
+        String r = this.createMeterService.createMeter(10, "lets see");
+        String r2 = this.createMeterService.createMeter(5, "VKW");
         return ResponseEntity.ok(r);
     }
 
@@ -54,8 +54,8 @@ public class DevController {
         List<MeterReadingDTO> dtos = list.stream().map(meterReading -> 
         
         MeterReadingDTO.builder()
-            .timestamp(meterReading.getTimestamp())
-            .meterId(meterReading.getMeterId())
+            .timestamp(meterReading.getTimestamp().toString())
+            .meterId(meterReading.getMeterId().toString())
             .posActInstPower(meterReading.getPosActInstPower())
             .posActEnergyTotal(meterReading.getPosActEnergyTotal())
             .negActInstPower(meterReading.getNegActInstPower())

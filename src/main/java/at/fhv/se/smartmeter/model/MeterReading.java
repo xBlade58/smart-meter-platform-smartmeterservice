@@ -1,6 +1,9 @@
 package at.fhv.se.smartmeter.model;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
+import java.util.UUID;
 
 /**
  * @author Justin Ströhle
@@ -10,8 +13,8 @@ import java.sql.Timestamp;
 
 public class MeterReading {
     
-    private Timestamp timestamp;
-    private int meterId;
+    private ZonedDateTime timestamp;
+    private UUID meterId;
     private int posActInstPower; // 1.7.0
     private int posActEnergyTotal; // 1.8.0
     private int negActInstPower; // 2.7.0
@@ -26,7 +29,7 @@ public class MeterReading {
     private float instCurr_l3; // 71.7.0
     private float instVolt_l3; // 72.7.0
 
-    public MeterReading(Timestamp timestamp, int meterId, int posActInstPower, int posActEnergyTotal, int negActInstPower,
+    public MeterReading(ZonedDateTime timestamp, UUID meterId, int posActInstPower, int posActEnergyTotal, int negActInstPower,
                         int negActEnergyTotal, int posReactEnergyTotal, int negReactEnergyTotal, int sumActInstantPower,
                         float instCurrL1, float instVoltL1, float instCurrL2, float instVoltL2, float instCurrL3,
                         float instVoltL3) {
@@ -50,7 +53,7 @@ public class MeterReading {
     public MeterReading() {
     }
 
-    public Timestamp getTimestamp() {
+    public ZonedDateTime getTimestamp() {
         return timestamp;
     }
 
@@ -106,7 +109,7 @@ public class MeterReading {
         return instVolt_l3;
     }
 
-    public int getMeterId(){
+    public UUID getMeterId(){
         return meterId;
     }
 }

@@ -1,6 +1,10 @@
 package at.fhv.se.smartmeter.application.service.meterReading;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.List;
+import java.util.UUID;
 
 import at.fhv.se.smartmeter.adapter.dto.MeterReadingDTO;
 import at.fhv.se.smartmeter.application.port.inbound.meterReading.CreateMeterReadingUseCase;
@@ -8,6 +12,7 @@ import at.fhv.se.smartmeter.application.port.inbound.meterReading.GetAllMeterRea
 import at.fhv.se.smartmeter.application.port.outbound.persistence.MeterReadingRepository;
 import at.fhv.se.smartmeter.model.MeterReading;
 
+// TODO: comments
 public class MeterReadingService implements CreateMeterReadingUseCase, GetAllMeterReadingsUseCase {
 
     private final MeterReadingRepository meterReadingRepository;
@@ -18,8 +23,10 @@ public class MeterReadingService implements CreateMeterReadingUseCase, GetAllMet
 
     @Override
     public String createMeterReading(MeterReadingDTO meterReadingDTO) {
+
+        ZonedDateTime zonedDate = LocalDateTime.parse(meterReadingDTO.getTimestamp()).atZone(ZoneId.of("UTC+1"));
         //TODO: verify if Meter exists
-        MeterReading meterReading = new MeterReading(meterReadingDTO.getTimestamp(), meterReadingDTO.getMeterId(),
+        MeterReading meterReading = new MeterReading(zonedDate, UUID.fromString(meterReadingDTO.getMeterId()),
                 meterReadingDTO.getPosActInstPower(), meterReadingDTO.getPosActEnergyTotal(),
                 meterReadingDTO.getNegActInstPower(), meterReadingDTO.getNegActEnergyTotal(),
                 meterReadingDTO.getPosReactEnergyTotal(), meterReadingDTO.getNegReactEnergyTotal(),

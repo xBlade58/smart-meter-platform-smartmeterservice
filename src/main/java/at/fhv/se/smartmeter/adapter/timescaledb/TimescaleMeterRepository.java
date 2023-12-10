@@ -15,11 +15,11 @@ public class TimescaleMeterRepository implements MeterRepository {
     
 
     @Override
-    public long save(Meter meter) {
+    public String save(Meter meter) {
         MeterDBEntity mm = new MeterDBEntity(meter.getSerialNumber(), meter.getManufacturer());
         MeterDBEntity savedMeter = this.meterJPARepo.save(mm);
         System.out.println(savedMeter.getId());
-        return savedMeter.getId();
+        return savedMeter.getId().toString();
     }
 
 }

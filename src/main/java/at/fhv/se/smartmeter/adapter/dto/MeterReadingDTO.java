@@ -13,8 +13,8 @@ import lombok.Getter;
 @Getter
 @Builder
 public class MeterReadingDTO {
-    private Timestamp timestamp;
-    private int meterId;
+    private String timestamp;
+    private String meterId;
     private int posActInstPower; // 1.7.0
     private int posActEnergyTotal; // 1.8.0
     private int negActInstPower; // 2.7.0

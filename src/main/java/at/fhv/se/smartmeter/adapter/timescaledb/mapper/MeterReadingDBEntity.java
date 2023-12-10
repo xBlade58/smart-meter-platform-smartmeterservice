@@ -1,8 +1,12 @@
 package at.fhv.se.smartmeter.adapter.timescaledb.mapper;
 
 import java.sql.Timestamp;
+import java.time.ZonedDateTime;
+import java.util.UUID;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
@@ -10,8 +14,10 @@ import jakarta.persistence.Table;
 @Table(name = "meter_reading")
 public class MeterReadingDBEntity {
     @Id
-    private Timestamp timestamp;
-    private int meterId;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID id;
+    private ZonedDateTime timestamp;
+    private UUID meterId;
     private int posActInstPower; // 1.7.0
     private int posActEnergyTotal; // 1.8.0
     private int negActInstPower; // 2.7.0
@@ -26,7 +32,7 @@ public class MeterReadingDBEntity {
     private float instCurr_l3; // 71.7.0
     private float instVolt_l3; // 72.7.0
 
-    public MeterReadingDBEntity(Timestamp timestamp, int meterId, int posActInstPower, int posActEnergyTotal,
+    public MeterReadingDBEntity(ZonedDateTime timestamp, UUID meterId, int posActInstPower, int posActEnergyTotal,
             int negActInstPower, int negActEnergyTotal, int posReactEnergyTotal, int negReactEnergyTotal,
             int sumActInstantPower, float instCurr_l1, float instVolt_l1, float instCurr_l2, float instVolt_l2,
             float instCurr_l3, float instVolt_l3) {
@@ -47,19 +53,19 @@ public class MeterReadingDBEntity {
         this.instVolt_l3 = instVolt_l3;
     }
 
-    public Timestamp getTimestamp() {
+    public ZonedDateTime getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(Timestamp timestamp) {
+    public void setTimestamp(ZonedDateTime timestamp) {
         this.timestamp = timestamp;
     }
 
-    public int getMeterId() {
+    public UUID getMeterId() {
         return meterId;
     }
 
-    public void setMeterId(int meterId) {
+    public void setMeterId(UUID meterId) {
         this.meterId = meterId;
     }
 

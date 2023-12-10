@@ -6,6 +6,7 @@ package at.fhv.se.smartmeter.model;
  */
 
 
+
 public class Meter {
 
     private long id;

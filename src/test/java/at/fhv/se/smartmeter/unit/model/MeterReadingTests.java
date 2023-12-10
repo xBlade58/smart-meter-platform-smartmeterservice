@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.sql.Timestamp;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
 
@@ -14,10 +17,10 @@ public class MeterReadingTests {
     @Test
     public void test_meterReadingCreation() {
         // given
-        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        ZonedDateTime timestamp = ZonedDateTime.now(ZoneId.of("UTC+1"));
 
         // when
-        MeterReading meterReading = new MeterReading(timestamp, 1, 100, 1000, 50, 500, 200, 200, 150,
+        MeterReading meterReading = new MeterReading(timestamp, UUID.randomUUID(), 100, 1000, 50, 500, 200, 200, 150,
                 10.5f, 220.0f, 20.0f, 230.0f, 30.0f, 40.0f);
 
         // then

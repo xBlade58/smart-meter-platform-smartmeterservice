@@ -3,6 +3,7 @@ package at.fhv.se.smartmeter.adapter.mqtt;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.UUID;
 
 import org.springframework.messaging.Message;
 import org.springframework.stereotype.Service;
@@ -22,11 +23,9 @@ public class Parser {
             JsonNode node = mapper.readTree(payload.toString());
             JsonNode acutalMsgNode = node.get("message");
 
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
-
             MeterReadingDTO dto = MeterReadingDTO.builder()
-                .timestamp(Timestamp.valueOf(LocalDateTime.parse(acutalMsgNode.get("timestamp").asText(), formatter)))
-                .meterId(5)
+                .timestamp(acutalMsgNode.get("timestamp").asText())
+                .meterId("5edc6d29-17c3-4a9f-b13e-08b9d5a61a38")
                 .posActInstPower(Integer.parseInt(acutalMsgNode.get("1.7.0").asText()))
                 .posActEnergyTotal(Integer.parseInt(acutalMsgNode.get("1.8.0").asText()))
                 .negActInstPower(Integer.parseInt(acutalMsgNode.get("2.7.0").asText()))
