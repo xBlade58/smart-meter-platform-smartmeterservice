@@ -2,11 +2,12 @@ package at.fhv.se.smartmeter.adapter.timescaledb;
 
 
 import java.sql.Timestamp;
+import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import at.fhv.se.smartmeter.adapter.timescaledb.mapper.MeterReadingDBEntity;
 
-public interface TimescaleJPAMeterReading extends JpaRepository<MeterReadingDBEntity, Timestamp> {
+public interface TimescaleJPAMeterReading extends JpaRepository<MeterReadingDBEntity, UUID> {
     
 }

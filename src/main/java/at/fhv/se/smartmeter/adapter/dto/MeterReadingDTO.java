@@ -1,7 +1,5 @@
 package at.fhv.se.smartmeter.adapter.dto;
 
-import java.sql.Timestamp;
-
 import lombok.Builder;
 import lombok.Getter;
 
