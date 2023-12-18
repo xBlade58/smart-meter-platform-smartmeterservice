@@ -1,6 +1,5 @@
 package at.fhv.se.smartmeter.adapter.timescaledb.mapper;
 
-import java.sql.Timestamp;
 import java.time.ZonedDateTime;
 import java.util.UUID;
 

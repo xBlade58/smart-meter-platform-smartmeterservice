@@ -1,0 +1,27 @@
+{"properties": [
+  {
+    "name": "mqtt.trust-store-password",
+    "type": "java.lang.String",
+    "description": "Password of Java trust-store"
+  },
+  {
+    "name": "mqtt.broker.url",
+    "type": "java.lang.String",
+    "description": "URL of Broker"
+  },
+  {
+    "name": "mqtt.client.id",
+    "type": "java.lang.String",
+    "description": "MQTT Client ID"
+  },
+  {
+    "name": "mqtt.topic",
+    "type": "java.lang.String",
+    "description": "The Topic to subscribe to"
+  },
+  {
+    "name": "mqtt.trust-store",
+    "type": "java.lang.String",
+    "description": "Path to the JKS file"
+  }
+]}

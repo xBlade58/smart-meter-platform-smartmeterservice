@@ -1,10 +1,5 @@
 package at.fhv.se.smartmeter.adapter.mqtt;
 
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.UUID;
-
 import org.springframework.messaging.Message;
 import org.springframework.stereotype.Service;
 
