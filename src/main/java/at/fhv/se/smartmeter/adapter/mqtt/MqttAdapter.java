@@ -28,12 +28,17 @@ public class MqttAdapter {
     @Value("${mqtt.topic}")
     private String topic;
 
+    @Value("${mqtt.trust-store}")
+    private String trustStore;
+
+    @Value("${mqtt.trust-store-password}")
+    private String trustStorePassword;
+
     @Autowired
     private CreateMeterReadingUseCase createMeterReadingUseCase;
 
     @Autowired
     private Parser parser;
-
 
     @Bean
     public MqttPahoClientFactory mqttClientFactory() {
@@ -41,6 +46,7 @@ public class MqttAdapter {
         String [] arr = new String[1];
         arr[0] = brokerUrl;
         factory.getConnectionOptions().setServerURIs(arr);
+        //factory.getConnectionOptions().setSocketFactory(SocketFactoryUtil.createSocketFactory(trustStore, trustStorePassword));
         return factory;
     }
     

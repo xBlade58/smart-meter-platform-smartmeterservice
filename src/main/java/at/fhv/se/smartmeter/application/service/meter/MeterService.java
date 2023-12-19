@@ -6,6 +6,7 @@ import at.fhv.se.smartmeter.model.Meter;
 
 public class MeterService implements CreateMeterUseCase {
 
+    
     private final MeterRepository meterRepo;
 
     public MeterService(MeterRepository meterRepo) {

@@ -2,12 +2,15 @@ version: '3'
 
 services:
   emqx-broker:
-    image: emqx:5.3.0
+    image: emqx:5.3.2
     environment:
     - "EMQX_NAME=emqx-broker"
     - "EMQX_HOST=node1-broker.emqx.io"
     - "EMQX_CLUSTER__DISCOVERY_STRATEGY=static"
     - "EMQX_CLUSTER__STATIC__SEEDS=[emqx-broker@node1-broker.emqx.io]"
+    - "EMQX_LISTENERS__SSL__DEFAULT__SSL_OPTIONS__KEYFILE=etc/certs/emqx.key"
+    - "EMQX_LISTENERS__SSL__DEFAULT__SSL_OPTIONS__CERTFILE=etc/certs/emqx.pem"
+    - "EMQX_LISTENERS__SSL__DEFAULT__SSL_OPTIONS__CACERTFILE=etc/certs/ca.pem"
     healthcheck:
       test: ["CMD", "/opt/emqx/bin/emqx", "ctl", "status"]
       interval: 5s
@@ -21,17 +24,24 @@ services:
       - 1884:1883
       - 8085:8083
       - 8086:8084
-      - 8884:8883
+      - 8883:8883
+      - 8884:8884
       - 18084:18083
+    volumes:
+      - ./certs/ca.pem:/opt/emqx/etc/certs/ca.pem
+      - ./certs/emqx.pem:/opt/emqx/etc/certs/emqx.pem
+      - ./certs/emqx.key:/opt/emqx/etc/certs/emqx.key
+      - vol-emqx-data:/opt/emqx/data
+      - vol-emqx-log:/opt/emqx/log
 
   timescaledb:
     image: timescale/timescaledb:latest-pg14
     ports:
       - 5432:5432
     environment:
-      POSTGRES_DB: timescaledb
-      POSTGRES_USER: adnim
-      POSTGRES_PASSWORD: adnim
+      POSTGRES_DB: ${TIMESCALEDB_DB}
+      POSTGRES_USER: ${TIMESCALEDB_USERNAME}
+      POSTGRES_PASSWORD: ${TIMESCALEDB_PASSWORD}
     networks:
       my-bridge-network:
         aliases:
@@ -41,3 +51,10 @@ networks:
   my-bridge-network:
     driver: bridge
     external: true
+
+volumes:
+  vol-emqx-data:
+    name: emqx-data
+  vol-emqx-log:
+    name: emqx-log
+  
