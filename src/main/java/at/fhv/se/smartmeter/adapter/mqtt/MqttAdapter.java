@@ -46,7 +46,7 @@ public class MqttAdapter {
         String [] arr = new String[1];
         arr[0] = brokerUrl;
         factory.getConnectionOptions().setServerURIs(arr);
-        factory.getConnectionOptions().setSocketFactory(SocketFactoryUtil.createSocketFactory(trustStore, trustStorePassword));
+        //factory.getConnectionOptions().setSocketFactory(SocketFactoryUtil.createSocketFactory(trustStore, trustStorePassword));
         return factory;
     }
     
