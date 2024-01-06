@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import at.fhv.se.smartmeter.adapter.timescaledb.mapper.MeterDBEntity;
-import at.fhv.se.smartmeter.application.port.outbound.persistence.MeterRepository;
-import at.fhv.se.smartmeter.model.Meter;
+import at.fhv.se.smartmeter.domain.model.MeterIndividual;
+import at.fhv.se.smartmeter.domain.port.outbound.persistence.MeterRepository;
 
 @Repository
 public class TimescaleMeterRepository implements MeterRepository {
@@ -15,8 +15,8 @@ public class TimescaleMeterRepository implements MeterRepository {
     
 
     @Override
-    public String save(Meter meter) {
-        MeterDBEntity mm = new MeterDBEntity(meter.getSerialNumber(), meter.getManufacturer());
+    public String save(MeterIndividual meter) {
+        MeterDBEntity mm = new MeterDBEntity(meter.getSerialNumber(), meter.getSerialNumber());
         MeterDBEntity savedMeter = this.meterJPARepo.save(mm);
         System.out.println(savedMeter.getId());
         return savedMeter.getId().toString();

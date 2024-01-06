@@ -12,15 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import at.fhv.se.smartmeter.adapter.dto.MeterReadingDTO;
-import at.fhv.se.smartmeter.application.port.inbound.meter.CreateMeterUseCase;
-import at.fhv.se.smartmeter.application.port.inbound.meterReading.CreateMeterReadingUseCase;
-import at.fhv.se.smartmeter.application.port.inbound.meterReading.GetAllMeterReadingsUseCase;
-import at.fhv.se.smartmeter.model.MeterReading;
+import at.fhv.se.smartmeter.domain.model.MeterReading;
+import at.fhv.se.smartmeter.domain.port.inbound.meter.CreateMeterUseCase;
+import at.fhv.se.smartmeter.domain.port.inbound.meterReading.CreateMeterReadingUseCase;
+import at.fhv.se.smartmeter.domain.port.inbound.meterReading.GetAllMeterReadingsUseCase;
 
-/**
- * @author Justin Ströhle
- * 22.11.2023
- */
 
 @RestController
 @RequestMapping(path = "/dev/v1/")
@@ -54,8 +50,8 @@ public class DevController {
         List<MeterReadingDTO> dtos = list.stream().map(meterReading -> 
         
         MeterReadingDTO.builder()
-            .timestamp(meterReading.getTimestamp().toString())
-            .meterId(meterReading.getMeterId().toString())
+            .timestamp(meterReading.getReadingTime().toString())
+            .meterId(meterReading.getMeterIndividualId().toString())
             .posActInstPower(meterReading.getPosActInstPower())
             .posActEnergyTotal(meterReading.getPosActEnergyTotal())
             .negActInstPower(meterReading.getNegActInstPower())

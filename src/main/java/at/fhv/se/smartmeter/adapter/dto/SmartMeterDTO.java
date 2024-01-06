@@ -1,9 +1,5 @@
 package at.fhv.se.smartmeter.adapter.dto;
 
-/**
- * @author Justin Ströhle
- * 23.11.2023
- */
 
 public class SmartMeterDTO {
     int id;

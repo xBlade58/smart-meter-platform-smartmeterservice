@@ -14,7 +14,7 @@ import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.MessageHandler;
 
 import at.fhv.se.smartmeter.adapter.dto.MeterReadingDTO;
-import at.fhv.se.smartmeter.application.port.inbound.meterReading.CreateMeterReadingUseCase;
+import at.fhv.se.smartmeter.domain.port.inbound.meterReading.CreateMeterReadingUseCase;
 
 @Configuration
 public class MqttAdapter {

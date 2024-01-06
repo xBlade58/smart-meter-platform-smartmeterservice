@@ -3,10 +3,6 @@ package at.fhv.se.smartmeter.adapter.dto;
 import lombok.Builder;
 import lombok.Getter;
 
-/**
- * @author Justin Ströhle
- * 23.11.2023
- */
 
 @Getter
 @Builder

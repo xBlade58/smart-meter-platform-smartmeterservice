@@ -1,8 +1,8 @@
 package at.fhv.se.smartmeter.application.service.meter;
 
-import at.fhv.se.smartmeter.application.port.inbound.meter.CreateMeterUseCase;
-import at.fhv.se.smartmeter.application.port.outbound.persistence.MeterRepository;
-import at.fhv.se.smartmeter.model.Meter;
+import at.fhv.se.smartmeter.domain.model.MeterIndividual;
+import at.fhv.se.smartmeter.domain.port.inbound.meter.CreateMeterUseCase;
+import at.fhv.se.smartmeter.domain.port.outbound.persistence.MeterRepository;
 
 public class MeterService implements CreateMeterUseCase {
 
@@ -15,7 +15,7 @@ public class MeterService implements CreateMeterUseCase {
 
     @Override
     public String createMeter(int serialNumber, String manufacturer) {
-        Meter m = new Meter(serialNumber, manufacturer);
+        MeterIndividual m = new MeterIndividual(serialNumber, manufacturer);
         return meterRepo.save(m);
     }
     

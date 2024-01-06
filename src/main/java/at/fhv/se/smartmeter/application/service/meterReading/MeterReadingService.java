@@ -7,10 +7,10 @@ import java.util.List;
 import java.util.UUID;
 
 import at.fhv.se.smartmeter.adapter.dto.MeterReadingDTO;
-import at.fhv.se.smartmeter.application.port.inbound.meterReading.CreateMeterReadingUseCase;
-import at.fhv.se.smartmeter.application.port.inbound.meterReading.GetAllMeterReadingsUseCase;
-import at.fhv.se.smartmeter.application.port.outbound.persistence.MeterReadingRepository;
-import at.fhv.se.smartmeter.model.MeterReading;
+import at.fhv.se.smartmeter.domain.model.MeterReading;
+import at.fhv.se.smartmeter.domain.port.inbound.meterReading.CreateMeterReadingUseCase;
+import at.fhv.se.smartmeter.domain.port.inbound.meterReading.GetAllMeterReadingsUseCase;
+import at.fhv.se.smartmeter.domain.port.outbound.persistence.MeterReadingRepository;
 
 // TODO: comments
 public class MeterReadingService implements CreateMeterReadingUseCase, GetAllMeterReadingsUseCase {
