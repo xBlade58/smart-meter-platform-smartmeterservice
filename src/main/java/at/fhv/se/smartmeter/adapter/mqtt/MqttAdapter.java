@@ -13,6 +13,8 @@ import org.springframework.integration.mqtt.support.DefaultPahoMessageConverter;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.MessageHandler;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+
 import at.fhv.se.smartmeter.adapter.dto.MeterReadingDTO;
 import at.fhv.se.smartmeter.domain.port.inbound.meterReading.CreateMeterReadingUseCase;
 
@@ -71,8 +73,16 @@ public class MqttAdapter {
     @ServiceActivator(inputChannel = "mqttInputChannel")
     public MessageHandler handler() {
         return (message) -> {
-            MeterReadingDTO dto = parser.parse(message);
-            createMeterReadingUseCase.createMeterReading(dto);
+            MeterReadingDTO dto;
+            try {
+                dto = parser.parse(message);
+                createMeterReadingUseCase.createMeterReading(dto);
+            } catch (JsonProcessingException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+                System.out.println("Skipping Message because of invalid format.");
+            }
+            
         };
     }
 }
