@@ -37,4 +37,10 @@ public class TimescaleMeterRepository implements MeterRepository {
         return savedMeter.getId().toString();
     }
 
+
+    @Override
+    public boolean existsById(String id) {
+        return meterJpa.existsById(UUID.fromString(id));
+    }
+
 }

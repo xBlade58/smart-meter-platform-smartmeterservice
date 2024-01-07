@@ -29,9 +29,8 @@ public class MeterReadingService implements CreateMeterReadingUseCase, GetAllMet
     @Autowired
     private final OperationalPropertyDefRepository propertyDefRepo;
 
-    
-    public MeterReadingService(MeterReadingRepository meterReadingRepository,
-            OperationalPropertyDefRepository propertyDefRepo) {
+
+    public MeterReadingService(MeterReadingRepository meterReadingRepository, OperationalPropertyDefRepository propertyDefRepo) {
         this.meterReadingRepository = meterReadingRepository;
         this.propertyDefRepo = propertyDefRepo;
     }
@@ -39,7 +38,7 @@ public class MeterReadingService implements CreateMeterReadingUseCase, GetAllMet
 
     @Override
     public String createMeterReading(MeterReadingDTO dto) {
-
+        
         ArrayList<MeterReadingPropDTO> propDTOs = new ArrayList<>();
         propDTOs.add(dto.getInstCurrL1());
         propDTOs.add(dto.getInstCurrL2());
@@ -53,7 +52,7 @@ public class MeterReadingService implements CreateMeterReadingUseCase, GetAllMet
         propDTOs.add(dto.getPosReactEnergyTotal());
         propDTOs.add(dto.getSumActInstantPower());
 
-        //TODO: verify if Meter exists
+        //TODO: verify if Meter exists necessary?
         /*
         if (!checkIfAllPropsExist(propDTOs)) {
             return  null;

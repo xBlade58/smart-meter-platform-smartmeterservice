@@ -9,5 +9,6 @@ VALUES
 
 -- Sample Meter entries
 INSERT INTO meter (id, serial_number, physical_meter_id) VALUES ('b52ac10f-58cc-6172-a567-0e02b2c3d479', 'SN123456', 'f47ac10b-58cc-4372-a567-0e02b2c3d479');
+INSERT INTO meter (id, serial_number, physical_meter_id) VALUES ('bf17c6a0-82ce-4214-adbd-5a7e4ecdb0ff', 'SN188191', 'f47ac10b-58cc-4372-a567-0e02b2c3d479');
 
 

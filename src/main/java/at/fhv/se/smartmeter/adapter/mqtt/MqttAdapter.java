@@ -27,7 +27,7 @@ public class MqttAdapter {
     @Value("${mqtt.client.id}")
     private String clientId;
 
-    @Value("${mqtt.topic}")
+    @Value("${mqtt.readings-topic}")
     private String topic;
 
     @Value("${mqtt.trust-store}")
