@@ -1,33 +1,27 @@
 package at.fhv.se.smartmeter.adapter.timescaledb.mapper;
 
+import java.io.Serializable;
 import java.time.ZonedDateTime;
 
-import at.fhv.se.smartmeter.domain.model.Unit;
-import jakarta.persistence.Embeddable;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-
-@Embeddable
-public class PropertyValueDBEmbeddable {
-    
-    @Enumerated(EnumType.STRING)
-    private Unit unit;
+public class PropertyValueDBValue implements Serializable {
+    //TODO: change type to UNIT
+    private String unit;
     private ZonedDateTime date;
     private float numericalValue;
     private String operationalPropertyDefId;
     
-    public PropertyValueDBEmbeddable(Unit unit, ZonedDateTime date, float numericalValue, String operationalPropertyDefId) {
+    public PropertyValueDBValue(String unit, ZonedDateTime date, float numericalValue, String operationalPropertyDefId) {
         this.unit = unit;
         this.date = date;
         this.numericalValue = numericalValue;
         this.operationalPropertyDefId = operationalPropertyDefId;
     }
 
-    public Unit getUnit() {
+    public String getUnit() {
         return unit;
     }
 
-    public void setUnit(Unit unit) {
+    public void setUnit(String unit) {
         this.unit = unit;
     }
 
@@ -55,5 +49,14 @@ public class PropertyValueDBEmbeddable {
         this.operationalPropertyDefId = operationalPropertyDefId;
     }
 
+    @Override
+    public String toString() {
+        return "PropertyValueDBValue [unit=" + unit + ", date=" + date + ", numericalValue=" + numericalValue
+                + ", operationalPropertyDefId=" + operationalPropertyDefId + "]";
+    }
+
+    private PropertyValueDBValue() {}
+  
+    
     
 }

@@ -30,7 +30,7 @@ public class MeterDBEntity {
 
 
 
-    private MeterDBEntity(){}
+    public MeterDBEntity(){}
 
 
 

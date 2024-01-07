@@ -20,7 +20,7 @@ public class Parser {
 
             MeterReadingDTO dto = MeterReadingDTO.builder()
                 .timestamp(node.get("timestamp").asText())
-                .meterId("5edc6d29-17c3-4a9f-b13e-08b9d5a61a38")
+                .meterId("b52ac10f-58cc-6172-a567-0e02b2c3d479")
                 .posActInstPower(new MeterReadingPropDTO("1.7.0", Float.parseFloat(node.get("1.7.0").asText())))
                 .posActEnergyTotal(new MeterReadingPropDTO("1.8.0", Float.parseFloat(node.get("1.8.0").asText())))
                 .negActInstPower(new MeterReadingPropDTO("2.7.0", Float.parseFloat(node.get("2.7.0").asText())))

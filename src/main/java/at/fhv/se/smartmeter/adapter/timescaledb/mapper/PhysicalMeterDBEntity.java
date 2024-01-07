@@ -56,5 +56,8 @@ public class PhysicalMeterDBEntity {
         this.meterClass = meterClass;
     }
 
+    public PhysicalMeterDBEntity() {}
+
     
+
 }

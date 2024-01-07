@@ -33,9 +33,9 @@ public class DevController {
 
     @GetMapping("/createNewMeter")
     public ResponseEntity createNewMeter(){
-        String r = this.createMeterService.createMeter("SERIAL100", "f47ac10b-58cc-4372-a567-0e02b2c3d479");
+        //String r = this.createMeterService.createMeter("SERIAL100", "f47ac10b-58cc-4372-a567-0e02b2c3d479");
         String r2 = this.createMeterService.createMeter("SERIAL2673", "f47ac10b-58cc-4372-a567-0e02b2c3d479");
-        return ResponseEntity.ok(r);
+        return ResponseEntity.ok(r2);
     }
 
     @PostMapping(value = "/readings/create", consumes = MediaType.APPLICATION_JSON_VALUE)
