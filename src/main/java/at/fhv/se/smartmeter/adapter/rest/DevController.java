@@ -33,8 +33,8 @@ public class DevController {
 
     @GetMapping("/createNewMeter")
     public ResponseEntity createNewMeter(){
-        String r = this.createMeterService.createMeter(10, "lets see");
-        String r2 = this.createMeterService.createMeter(5, "VKW");
+        String r = this.createMeterService.createMeter("SERIAL100", "f47ac10b-58cc-4372-a567-0e02b2c3d479");
+        String r2 = this.createMeterService.createMeter("SERIAL2673", "f47ac10b-58cc-4372-a567-0e02b2c3d479");
         return ResponseEntity.ok(r);
     }
 
@@ -46,6 +46,7 @@ public class DevController {
 
     @GetMapping("/readings/getAll")
     public ResponseEntity getAllMeterReadings() {
+        /*
         List<MeterReading> list = this.getAllMeterReadingsUseCase.getAll();
         List<MeterReadingDTO> dtos = list.stream().map(meterReading -> 
         
@@ -63,8 +64,8 @@ public class DevController {
             .instVoltL2(meterReading.getInstVolt_l2())
             .instCurrL3(meterReading.getInstVolt_l3())
             .instVoltL3(meterReading.getInstVolt_l3())
-            .build()).toList();
+            .build()).toList(); */
             
-        return ResponseEntity.ok(dtos);
+        return ResponseEntity.ok("dtos");
     }
 }

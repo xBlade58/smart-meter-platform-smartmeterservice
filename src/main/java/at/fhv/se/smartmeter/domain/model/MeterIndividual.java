@@ -9,8 +9,8 @@ public class MeterIndividual {
 
     public MeterIndividual(){}
 
-    public MeterIndividual(String name, String physicalMeterId) {
-        this.serialNumber = name;
+    public MeterIndividual(String serialNumber, String physicalMeterId) {
+        this.serialNumber = serialNumber;
         this.physicalMeterId = physicalMeterId;
     }
 

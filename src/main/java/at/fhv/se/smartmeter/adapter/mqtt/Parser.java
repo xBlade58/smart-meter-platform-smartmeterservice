@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import at.fhv.se.smartmeter.adapter.dto.MeterReadingDTO;
+import at.fhv.se.smartmeter.adapter.dto.MeterReadingPropDTO;
 
 @Service
 public class Parser {
@@ -20,19 +21,19 @@ public class Parser {
             MeterReadingDTO dto = MeterReadingDTO.builder()
                 .timestamp(node.get("timestamp").asText())
                 .meterId("5edc6d29-17c3-4a9f-b13e-08b9d5a61a38")
-                .posActInstPower(Integer.parseInt(node.get("1.7.0").asText()))
-                .posActEnergyTotal(Integer.parseInt(node.get("1.8.0").asText()))
-                .negActInstPower(Integer.parseInt(node.get("2.7.0").asText()))
-                .negActEnergyTotal(Integer.parseInt(node.get("2.8.0").asText()))
-                .posReactEnergyTotal(Integer.parseInt(node.get("3.8.0").asText()))
-                .negReactEnergyTotal(Integer.parseInt(node.get("4.8.0").asText()))
-                .sumActInstantPower(Integer.parseInt(node.get("16.7.0").asText()))
-                .instCurrL1(Float.parseFloat(node.get("31.7.0").asText()))
-                .instVoltL1(Float.parseFloat(node.get("32.7.0").asText()))
-                .instCurrL2(Float.parseFloat(node.get("51.7.0").asText()))
-                .instVoltL2(Float.parseFloat(node.get("52.7.0").asText()))
-                .instCurrL3(Float.parseFloat(node.get("71.7.0").asText()))
-                .instVoltL3(Float.parseFloat(node.get("72.7.0").asText()))
+                .posActInstPower(new MeterReadingPropDTO("1.7.0", Float.parseFloat(node.get("1.7.0").asText())))
+                .posActEnergyTotal(new MeterReadingPropDTO("1.8.0", Float.parseFloat(node.get("1.8.0").asText())))
+                .negActInstPower(new MeterReadingPropDTO("2.7.0", Float.parseFloat(node.get("2.7.0").asText())))
+                .negActEnergyTotal(new MeterReadingPropDTO("2.8.0", Float.parseFloat(node.get("2.8.0").asText())))
+                .posReactEnergyTotal(new MeterReadingPropDTO("3.8.0", Float.parseFloat(node.get("3.8.0").asText())))
+                .negReactEnergyTotal(new MeterReadingPropDTO("4.8.0", Float.parseFloat(node.get("4.8.0").asText())))
+                .sumActInstantPower(new MeterReadingPropDTO("16.7.0", Float.parseFloat(node.get("16.7.0").asText())))
+                .instCurrL1(new MeterReadingPropDTO("31.7.0", Float.parseFloat(node.get("31.7.0").asText())))
+                .instVoltL1(new MeterReadingPropDTO("32.7.0", Float.parseFloat(node.get("32.7.0").asText())))
+                .instCurrL2(new MeterReadingPropDTO("51.7.0", Float.parseFloat(node.get("51.7.0").asText())))
+                .instVoltL2(new MeterReadingPropDTO("52.7.0", Float.parseFloat(node.get("52.7.0").asText())))
+                .instCurrL3(new MeterReadingPropDTO("71.7.0", Float.parseFloat(node.get("71.7.0").asText())))
+                .instVoltL3(new MeterReadingPropDTO("72.7.0", Float.parseFloat(node.get("72.7.0").asText())))
                 .build();
 
             return dto;

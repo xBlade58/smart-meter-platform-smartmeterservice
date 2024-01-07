@@ -3,9 +3,12 @@ package at.fhv.se.smartmeter.adapter.timescaledb.mapper;
 import java.util.UUID;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -14,39 +17,60 @@ public class MeterDBEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
-    private int serialNumber;
-    private String manufacturer;
+    private String serialNumber;
 
-    public MeterDBEntity(int serialNumber, String manufacturer) {
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "physical_meter_id")
+    private PhysicalMeterDBEntity physicalMeter;
+
+
+    public MeterDBEntity(String serialNumber) {
         this.serialNumber = serialNumber;
-        this.manufacturer = manufacturer;
     }
+
+
+
+    private MeterDBEntity(){}
+
+
 
     public UUID getId() {
         return id;
     }
 
-    public int getSerialNumber() {
-        return serialNumber;
-    }
 
-    public String getManufacturer() {
-        return manufacturer;
-    }
 
     public void setId(UUID id) {
         this.id = id;
     }
 
-    public void setSerialNumber(int serialNumber) {
+
+
+    public String getSerialNumber() {
+        return serialNumber;
+    }
+
+
+
+    public void setSerialNumber(String serialNumber) {
         this.serialNumber = serialNumber;
     }
 
-    public void setManufacturer(String manufacturer) {
-        this.manufacturer = manufacturer;
+
+
+    public PhysicalMeterDBEntity getPhysicalMeter() {
+        return physicalMeter;
     }
 
-    private MeterDBEntity(){}
+
+
+    public void setPhysicalMeter(PhysicalMeterDBEntity physicalMeter) {
+        this.physicalMeter = physicalMeter;
+    }
+
+
+
+
   
 
 }

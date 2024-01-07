@@ -6,6 +6,6 @@ import at.fhv.se.smartmeter.domain.model.MeterReading;
 
 
 public interface MeterReadingRepository {
-    void save(MeterReading mr);
+    String save(MeterReading mr);
     List<MeterReading> getAllMeterReadings();
 }

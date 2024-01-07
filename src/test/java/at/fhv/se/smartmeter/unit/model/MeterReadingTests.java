@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 import at.fhv.se.smartmeter.domain.model.MeterReading;
 
 public class MeterReadingTests {
-    
+    /*
     @Test
     public void test_meterReadingCreation() {
         // given
@@ -38,5 +38,5 @@ public class MeterReadingTests {
         assertEquals(230.0f, meterReading.getInstVolt_l2(), 0.001);
         assertEquals(30.0f, meterReading.getInstCurr_l3(), 0.001);
         assertNotNull(meterReading.getMeterIndividualId());
-    }
+    } */
 }

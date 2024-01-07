@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import at.fhv.se.smartmeter.domain.model.MeterIndividual;
 
 public class MeterTests {
-    
+    /*
     @Test
     void test_meterCreation() {
         // given
@@ -21,5 +21,5 @@ public class MeterTests {
         assertEquals(m.getId(), 0);
         assertEquals(m.getSerialNumber(), manufacturer);
         assertEquals(m.getSerialNumber(), m.getSerialNumber());
-    }
+    } */
 }

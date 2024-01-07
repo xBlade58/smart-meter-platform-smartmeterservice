@@ -1,4 +1,4 @@
-package at.fhv.se.smartmeter.adapter.timescaledb;
+package at.fhv.se.smartmeter.adapter.timescaledb.jpaRepos;
 
 
 import java.util.UUID;
