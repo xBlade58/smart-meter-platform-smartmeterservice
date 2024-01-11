@@ -5,13 +5,15 @@ import lombok.Getter;
 @Getter
 public class MeterReadingPropDTO {
     
-    private String obisCode;
+    private String operationalPropertyDef;
     private float value;
+    private String unit;
     //TODO: add unit as attribute?
-    public MeterReadingPropDTO(String obisCode, float value) {
-        this.obisCode = obisCode;
+    public MeterReadingPropDTO(String operationalPropertyDef, float value, String unit) {
+        this.operationalPropertyDef = operationalPropertyDef;
         this.value = value;
+        this.unit = unit;
     }
-    
+   
 
 }

@@ -3,9 +3,11 @@ package at.fhv.se.smartmeter.application.meterReading;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,36 +39,30 @@ public class MeterReadingService implements CreateMeterReadingUseCase, GetAllMet
 
 
     @Override
-    public String createMeterReading(MeterReadingDTO dto) {
+    public String createMeterReading(MeterReadingDTO meterReadingDTO) {
         
-        ArrayList<MeterReadingPropDTO> propDTOs = new ArrayList<>();
-        propDTOs.add(dto.getInstCurrL1());
-        propDTOs.add(dto.getInstCurrL2());
-        propDTOs.add(dto.getInstCurrL3());
-        propDTOs.add(dto.getInstVoltL1());
-        propDTOs.add(dto.getInstVoltL2());
-        propDTOs.add(dto.getNegActEnergyTotal());
-        propDTOs.add(dto.getNegActInstPower());
-        propDTOs.add(dto.getNegReactEnergyTotal());
-        propDTOs.add(dto.getPosActEnergyTotal());
-        propDTOs.add(dto.getPosReactEnergyTotal());
-        propDTOs.add(dto.getSumActInstantPower());
-
         //TODO: verify if Meter exists necessary?
         /*
         if (!checkIfAllPropsExist(propDTOs)) {
             return  null;
         } */
 
-        ZonedDateTime zonedDate = LocalDateTime.parse(dto.getTimestamp()).atZone(ZoneId.of("UTC+1"));
-        List<PropertyValue> propValues  = new LinkedList<>();
-        for (MeterReadingPropDTO propDTO : propDTOs) {
-            propValues.add(new PropertyValue(Unit.V, zonedDate, propDTO.getValue(), propDTO.getObisCode()));
-        }
-        MeterReading mr = new MeterReading(null, zonedDate, dto.getMeterId(), propValues);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssXXX");
+        ZonedDateTime readingTime = ZonedDateTime.parse(meterReadingDTO.getReadingTime(), formatter);
+
+        MeterReadingPropDTO[] propDTOs = meterReadingDTO.getPropertyValues();
+        List<PropertyValue> propValues = Arrays.stream(propDTOs)
+            .map(propDTO -> new PropertyValue(
+                Unit.valueOf(propDTO.getUnit()),
+                readingTime,
+                propDTO.getValue(),
+                propDTO.getOperationalPropertyDef()
+            ))
+            .collect(Collectors.toList());
+        MeterReading mr = new MeterReading(null, readingTime, meterReadingDTO.getMeterId(), propValues);
         meterReadingRepository.save(mr);
 
-        return dto.getTimestamp().toString();        
+        return meterReadingDTO.getReadingTime().toString();        
     }
 
 
@@ -78,7 +74,7 @@ public class MeterReadingService implements CreateMeterReadingUseCase, GetAllMet
     
     // TODO: clarify if this is ok
     private boolean checkIfAllPropsExist(ArrayList<MeterReadingPropDTO> propDTOs) {
-        return propDTOs.stream().allMatch(propDto -> propertyDefRepo.existsById(propDto.getObisCode()));
+        return propDTOs.stream().allMatch(propDto -> propertyDefRepo.existsById(propDto.getOperationalPropertyDef()));
     }
     
 }

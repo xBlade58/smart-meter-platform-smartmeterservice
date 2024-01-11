@@ -1,9 +1,10 @@
 package at.fhv.se.smartmeter.domain.model;
 
 public enum Unit {
-    A("Amperes"),
-    V("Volts"),
-    KWH("Kilowatt Hours");
+    A("A"),
+    V("V"),
+    KWH("kWh"),
+    KVARH("kvarh");
 
     private final String label;
 

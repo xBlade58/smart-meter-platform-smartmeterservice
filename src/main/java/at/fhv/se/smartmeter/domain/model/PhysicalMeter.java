@@ -6,6 +6,7 @@ public class PhysicalMeter {
     private String name; // Kaifa
     private String version; // MA309M
     private MeterClass meterClass; // ELECTRICITY
+    //TODO add List<OperationalPropertyDef>
 
     public PhysicalMeter(String id, String name, String version, MeterClass meterClass) {
         this.id = id;
