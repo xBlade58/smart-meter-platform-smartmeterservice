@@ -10,8 +10,8 @@ import at.fhv.se.smartmeter.adapter.timescaledb.jpaRepos.TimescaleJPAMeter;
 import at.fhv.se.smartmeter.adapter.timescaledb.jpaRepos.TimescaleJPAPhysicalMeter;
 import at.fhv.se.smartmeter.adapter.timescaledb.mapper.MeterDBEntity;
 import at.fhv.se.smartmeter.adapter.timescaledb.mapper.PhysicalMeterDBEntity;
+import at.fhv.se.smartmeter.application.port.outbound.persistence.MeterRepository;
 import at.fhv.se.smartmeter.domain.model.MeterIndividual;
-import at.fhv.se.smartmeter.domain.port.outbound.persistence.MeterRepository;
 
 @Repository
 public class TimescaleMeterRepository implements MeterRepository {

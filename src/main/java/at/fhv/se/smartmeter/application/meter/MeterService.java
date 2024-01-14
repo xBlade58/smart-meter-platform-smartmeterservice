@@ -3,9 +3,9 @@ package at.fhv.se.smartmeter.application.meter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import at.fhv.se.smartmeter.application.port.inbound.meter.CreateMeterUseCase;
+import at.fhv.se.smartmeter.application.port.outbound.persistence.MeterRepository;
 import at.fhv.se.smartmeter.domain.model.MeterIndividual;
-import at.fhv.se.smartmeter.domain.port.inbound.meter.CreateMeterUseCase;
-import at.fhv.se.smartmeter.domain.port.outbound.persistence.MeterRepository;
 
 @Service
 public class MeterService implements CreateMeterUseCase {

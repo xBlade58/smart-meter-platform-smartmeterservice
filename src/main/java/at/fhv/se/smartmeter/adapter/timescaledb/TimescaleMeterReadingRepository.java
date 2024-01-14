@@ -15,8 +15,8 @@ import at.fhv.se.smartmeter.adapter.timescaledb.jpaRepos.TimescaleJPAMeterReadin
 import at.fhv.se.smartmeter.adapter.timescaledb.mapper.MeterDBEntity;
 import at.fhv.se.smartmeter.adapter.timescaledb.mapper.MeterReadingDBEntity;
 import at.fhv.se.smartmeter.adapter.timescaledb.mapper.PropertyValueDBValue;
+import at.fhv.se.smartmeter.application.port.outbound.persistence.MeterReadingRepository;
 import at.fhv.se.smartmeter.domain.model.MeterReading;
-import at.fhv.se.smartmeter.domain.port.outbound.persistence.MeterReadingRepository;
 
 @Repository
 public class TimescaleMeterReadingRepository implements MeterReadingRepository {

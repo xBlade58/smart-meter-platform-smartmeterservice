@@ -1,4 +1,4 @@
-package at.fhv.se.smartmeter.adapter.dto;
+package at.fhv.se.smartmeter.application.dto;
 
 
 public class SmartMeterDTO {

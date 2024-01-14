@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import at.fhv.se.smartmeter.adapter.dto.MeterReadingDTO;
+import at.fhv.se.smartmeter.application.dto.MeterReadingDTO;
+import at.fhv.se.smartmeter.application.port.inbound.meter.CreateMeterUseCase;
+import at.fhv.se.smartmeter.application.port.inbound.meterReading.CreateMeterReadingUseCase;
+import at.fhv.se.smartmeter.application.port.inbound.meterReading.GetAllMeterReadingsUseCase;
 import at.fhv.se.smartmeter.domain.model.MeterReading;
-import at.fhv.se.smartmeter.domain.port.inbound.meter.CreateMeterUseCase;
-import at.fhv.se.smartmeter.domain.port.inbound.meterReading.CreateMeterReadingUseCase;
-import at.fhv.se.smartmeter.domain.port.inbound.meterReading.GetAllMeterReadingsUseCase;
 
 
 @RestController

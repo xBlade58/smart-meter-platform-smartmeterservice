@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import at.fhv.se.smartmeter.adapter.dto.MeterReadingQueryDTO;
-import at.fhv.se.smartmeter.domain.port.inbound.meterReading.GetMeterReadingForIntervalUseCase;
+import at.fhv.se.smartmeter.application.dto.MeterReadingQueryDTO;
+import at.fhv.se.smartmeter.application.port.inbound.meterReading.GetMeterReadingForIntervalUseCase;
 
 
 @RestController

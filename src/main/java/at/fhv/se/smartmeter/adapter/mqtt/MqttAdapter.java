@@ -15,8 +15,8 @@ import org.springframework.messaging.MessageHandler;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
-import at.fhv.se.smartmeter.adapter.dto.MeterReadingDTO;
-import at.fhv.se.smartmeter.domain.port.inbound.meterReading.CreateMeterReadingUseCase;
+import at.fhv.se.smartmeter.application.dto.MeterReadingDTO;
+import at.fhv.se.smartmeter.application.port.inbound.meterReading.CreateMeterReadingUseCase;
 
 @Configuration
 public class MqttAdapter {

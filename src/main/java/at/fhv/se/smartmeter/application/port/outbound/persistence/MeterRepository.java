@@ -1,4 +1,4 @@
-package at.fhv.se.smartmeter.domain.port.outbound.persistence;
+package at.fhv.se.smartmeter.application.port.outbound.persistence;
 
 import at.fhv.se.smartmeter.domain.model.MeterIndividual;
 

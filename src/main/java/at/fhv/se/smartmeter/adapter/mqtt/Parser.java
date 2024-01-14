@@ -10,8 +10,8 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import at.fhv.se.smartmeter.adapter.dto.MeterReadingDTO;
-import at.fhv.se.smartmeter.adapter.dto.MeterReadingPropDTO;
+import at.fhv.se.smartmeter.application.dto.MeterReadingDTO;
+import at.fhv.se.smartmeter.application.dto.MeterReadingPropDTO;
 
 @Service
 public class Parser {

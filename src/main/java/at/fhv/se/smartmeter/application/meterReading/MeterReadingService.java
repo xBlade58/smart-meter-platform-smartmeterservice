@@ -12,17 +12,17 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import at.fhv.se.smartmeter.adapter.dto.MeterReadingDTO;
-import at.fhv.se.smartmeter.adapter.dto.MeterReadingPropDTO;
-import at.fhv.se.smartmeter.adapter.dto.MeterReadingQueryDTO;
+import at.fhv.se.smartmeter.application.dto.MeterReadingDTO;
+import at.fhv.se.smartmeter.application.dto.MeterReadingPropDTO;
+import at.fhv.se.smartmeter.application.dto.MeterReadingQueryDTO;
+import at.fhv.se.smartmeter.application.port.inbound.meterReading.CreateMeterReadingUseCase;
+import at.fhv.se.smartmeter.application.port.inbound.meterReading.GetAllMeterReadingsUseCase;
+import at.fhv.se.smartmeter.application.port.inbound.meterReading.GetMeterReadingForIntervalUseCase;
+import at.fhv.se.smartmeter.application.port.outbound.persistence.MeterReadingRepository;
+import at.fhv.se.smartmeter.application.port.outbound.persistence.OperationalPropertyDefRepository;
 import at.fhv.se.smartmeter.domain.model.MeterReading;
 import at.fhv.se.smartmeter.domain.model.PropertyValue;
 import at.fhv.se.smartmeter.domain.model.Unit;
-import at.fhv.se.smartmeter.domain.port.inbound.meterReading.CreateMeterReadingUseCase;
-import at.fhv.se.smartmeter.domain.port.inbound.meterReading.GetAllMeterReadingsUseCase;
-import at.fhv.se.smartmeter.domain.port.inbound.meterReading.GetMeterReadingForIntervalUseCase;
-import at.fhv.se.smartmeter.domain.port.outbound.persistence.MeterReadingRepository;
-import at.fhv.se.smartmeter.domain.port.outbound.persistence.OperationalPropertyDefRepository;
 
 @Service
 public class MeterReadingService implements CreateMeterReadingUseCase, GetAllMeterReadingsUseCase, GetMeterReadingForIntervalUseCase {

@@ -1,4 +1,4 @@
-package at.fhv.se.smartmeter.domain.port.inbound.meterReading;
+package at.fhv.se.smartmeter.application.port.inbound.meterReading;
 
 import java.util.List;
 

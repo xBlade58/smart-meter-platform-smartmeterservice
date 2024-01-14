@@ -1,4 +1,4 @@
-package at.fhv.se.smartmeter.adapter.dto;
+package at.fhv.se.smartmeter.application.dto;
 
 import lombok.Builder;
 import lombok.Getter;
