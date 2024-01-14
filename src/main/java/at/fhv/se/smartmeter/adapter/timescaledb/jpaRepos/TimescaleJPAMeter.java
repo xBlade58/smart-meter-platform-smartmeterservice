@@ -5,7 +5,7 @@ import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import at.fhv.se.smartmeter.adapter.timescaledb.mapper.MeterDBEntity;
+import at.fhv.se.smartmeter.adapter.timescaledb.model.MeterDBEntity;
 
 public interface TimescaleJPAMeter extends JpaRepository<MeterDBEntity, UUID> {
 

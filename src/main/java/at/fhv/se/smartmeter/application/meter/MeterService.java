@@ -19,7 +19,7 @@ public class MeterService implements CreateMeterUseCase {
 
     @Override
     public String createMeter(String serialNumber, String physicalMeterId) {
-        MeterIndividual m = new MeterIndividual(serialNumber, physicalMeterId);
+        MeterIndividual m = new MeterIndividual(serialNumber, physicalMeterId, null);
         return meterRepo.save(m);
     }
     

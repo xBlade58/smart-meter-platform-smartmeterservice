@@ -8,8 +8,8 @@ import org.springframework.stereotype.Repository;
 
 import at.fhv.se.smartmeter.adapter.timescaledb.jpaRepos.TimescaleJPAMeter;
 import at.fhv.se.smartmeter.adapter.timescaledb.jpaRepos.TimescaleJPAPhysicalMeter;
-import at.fhv.se.smartmeter.adapter.timescaledb.mapper.MeterDBEntity;
-import at.fhv.se.smartmeter.adapter.timescaledb.mapper.PhysicalMeterDBEntity;
+import at.fhv.se.smartmeter.adapter.timescaledb.model.MeterDBEntity;
+import at.fhv.se.smartmeter.adapter.timescaledb.model.PhysicalMeterDBEntity;
 import at.fhv.se.smartmeter.application.port.outbound.persistence.MeterRepository;
 import at.fhv.se.smartmeter.domain.model.MeterIndividual;
 

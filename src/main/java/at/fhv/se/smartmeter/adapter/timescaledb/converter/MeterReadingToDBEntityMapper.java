@@ -5,8 +5,8 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
-import at.fhv.se.smartmeter.adapter.timescaledb.mapper.MeterReadingDBEntity;
-import at.fhv.se.smartmeter.adapter.timescaledb.mapper.PropertyValueDBValue;
+import at.fhv.se.smartmeter.adapter.timescaledb.model.MeterReadingDBEntity;
+import at.fhv.se.smartmeter.adapter.timescaledb.model.PropertyValueDBValue;
 import at.fhv.se.smartmeter.domain.model.MeterReading;
 import at.fhv.se.smartmeter.domain.model.PropertyValue;
 import at.fhv.se.smartmeter.domain.model.Unit;

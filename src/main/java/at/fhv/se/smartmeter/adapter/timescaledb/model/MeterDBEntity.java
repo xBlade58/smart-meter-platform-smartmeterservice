@@ -1,4 +1,4 @@
-package at.fhv.se.smartmeter.adapter.timescaledb.mapper;
+package at.fhv.se.smartmeter.adapter.timescaledb.model;
 
 import java.util.UUID;
 
@@ -27,8 +27,6 @@ public class MeterDBEntity {
     public MeterDBEntity(String serialNumber) {
         this.serialNumber = serialNumber;
     }
-
-
 
     public MeterDBEntity(){}
 

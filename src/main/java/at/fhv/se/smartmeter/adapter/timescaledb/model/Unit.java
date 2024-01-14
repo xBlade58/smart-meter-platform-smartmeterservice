@@ -1,4 +1,4 @@
-package at.fhv.se.smartmeter.adapter.timescaledb.mapper;
+package at.fhv.se.smartmeter.adapter.timescaledb.model;
 
 public enum Unit {
     A("Amperes"),
