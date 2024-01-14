@@ -51,9 +51,8 @@ public class OperationalPropertyDefDBEntity {
     public void setAllowedUnits(Unit[] allowedUnits) {
         this.allowedUnits = allowedUnits;
     }
+    
 
     private OperationalPropertyDefDBEntity() {}
-
-    
     
 }

@@ -2,8 +2,8 @@ package at.fhv.se.smartmeter.domain.port.inbound.meterReading;
 
 import java.util.List;
 
-import at.fhv.se.smartmeter.adapter.dto.MeterReadingDTO;
+import at.fhv.se.smartmeter.adapter.dto.MeterReadingQueryDTO;
 
 public interface GetMeterReadingForIntervalUseCase {
-    List<MeterReadingDTO> getMeterReadings(String startDate, String endDate);
+    List<MeterReadingQueryDTO> getMeterReadingsForInterval(String meterId, String startDate, String endDate);
 }

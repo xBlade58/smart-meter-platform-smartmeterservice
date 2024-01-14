@@ -3,6 +3,7 @@ package at.fhv.se.smartmeter.domain.model;
 public enum Unit {
     A("A"),
     V("V"),
+    KW("kW"),
     KWH("kWh"),
     KVARH("kvarh");
 
@@ -14,5 +15,14 @@ public enum Unit {
 
     public String getLabel() {
         return label;
+    }
+
+    public static Unit fromString(String text) {
+        for (Unit unit : Unit.values()) {
+            if (unit.label.equalsIgnoreCase(text)) {
+                return unit;
+            }
+        }
+        throw new IllegalArgumentException("No constant with label " + text + " found in enum Unit");
     }
 }

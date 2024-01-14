@@ -1,7 +1,6 @@
 package at.fhv.se.smartmeter.adapter.mqtt;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.springframework.messaging.Message;
 import org.springframework.stereotype.Service;
@@ -29,14 +28,14 @@ public class Parser {
         ArrayList<MeterReadingPropDTO> arrList = new ArrayList<>();
 
         for (JsonNode propNode : propertyValues) {
-            arrList.add(new MeterReadingPropDTO(
-                propNode.get("propertyName").asText(), 
-                Float.parseFloat(propNode.get("numericalValue").asText()), 
-                propNode.get("unit").asText()));
+            arrList.add(MeterReadingPropDTO.builder()
+                .operationalPropertyDef(propNode.get("propertyName").asText())
+                .value(Float.parseFloat(propNode.get("numericalValue").asText()))
+                .unit(propNode.get("unit").asText()).build());
         }
         
         MeterReadingDTO dto = MeterReadingDTO. builder()
-            .readingTime(node.get("timestamp").asText())
+            .readingTime(node.get("readingTime").asText())
             .meterId(node.get("meterId").asText())
             .propertyValues(arrList.toArray(new MeterReadingPropDTO[0]))
             .build();

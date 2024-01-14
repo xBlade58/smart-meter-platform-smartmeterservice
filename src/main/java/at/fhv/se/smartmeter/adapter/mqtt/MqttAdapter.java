@@ -78,7 +78,6 @@ public class MqttAdapter {
                 dto = parser.parse(message);
                 createMeterReadingUseCase.createMeterReading(dto);
             } catch (JsonProcessingException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
                 System.out.println("Skipping Message because of invalid format.");
             }

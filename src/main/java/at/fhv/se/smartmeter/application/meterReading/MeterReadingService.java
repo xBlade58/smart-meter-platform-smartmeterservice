@@ -14,16 +14,18 @@ import org.springframework.stereotype.Service;
 
 import at.fhv.se.smartmeter.adapter.dto.MeterReadingDTO;
 import at.fhv.se.smartmeter.adapter.dto.MeterReadingPropDTO;
+import at.fhv.se.smartmeter.adapter.dto.MeterReadingQueryDTO;
 import at.fhv.se.smartmeter.domain.model.MeterReading;
 import at.fhv.se.smartmeter.domain.model.PropertyValue;
 import at.fhv.se.smartmeter.domain.model.Unit;
 import at.fhv.se.smartmeter.domain.port.inbound.meterReading.CreateMeterReadingUseCase;
 import at.fhv.se.smartmeter.domain.port.inbound.meterReading.GetAllMeterReadingsUseCase;
+import at.fhv.se.smartmeter.domain.port.inbound.meterReading.GetMeterReadingForIntervalUseCase;
 import at.fhv.se.smartmeter.domain.port.outbound.persistence.MeterReadingRepository;
 import at.fhv.se.smartmeter.domain.port.outbound.persistence.OperationalPropertyDefRepository;
 
 @Service
-public class MeterReadingService implements CreateMeterReadingUseCase, GetAllMeterReadingsUseCase {
+public class MeterReadingService implements CreateMeterReadingUseCase, GetAllMeterReadingsUseCase, GetMeterReadingForIntervalUseCase {
 
     @Autowired
     private final MeterReadingRepository meterReadingRepository;
@@ -47,19 +49,18 @@ public class MeterReadingService implements CreateMeterReadingUseCase, GetAllMet
             return  null;
         } */
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssXXX");
-        ZonedDateTime readingTime = ZonedDateTime.parse(meterReadingDTO.getReadingTime(), formatter);
+        ZonedDateTime readingTime = convertToDateFormat(meterReadingDTO.getReadingTime());
 
         MeterReadingPropDTO[] propDTOs = meterReadingDTO.getPropertyValues();
         List<PropertyValue> propValues = Arrays.stream(propDTOs)
             .map(propDTO -> new PropertyValue(
-                Unit.valueOf(propDTO.getUnit()),
+                Unit.fromString(propDTO.getUnit()),
                 readingTime,
                 propDTO.getValue(),
                 propDTO.getOperationalPropertyDef()
             ))
             .collect(Collectors.toList());
-        MeterReading mr = new MeterReading(null, readingTime, meterReadingDTO.getMeterId(), propValues);
+        MeterReading mr = new MeterReading(meterReadingRepository.nextIdentity(), readingTime, meterReadingDTO.getMeterId(), propValues);
         meterReadingRepository.save(mr);
 
         return meterReadingDTO.getReadingTime().toString();        
@@ -76,5 +77,43 @@ public class MeterReadingService implements CreateMeterReadingUseCase, GetAllMet
     private boolean checkIfAllPropsExist(ArrayList<MeterReadingPropDTO> propDTOs) {
         return propDTOs.stream().allMatch(propDto -> propertyDefRepo.existsById(propDto.getOperationalPropertyDef()));
     }
+
+
+    @Override
+    public List<MeterReadingQueryDTO> getMeterReadingsForInterval(String meterId, String startDate, String endDate) {
+        ZonedDateTime start = LocalDateTime.parse(startDate, DateTimeFormatter.ISO_DATE_TIME).atZone(ZoneId.of("UTC"));
+        ZonedDateTime end = LocalDateTime.parse(endDate, DateTimeFormatter.ISO_DATE_TIME).atZone(ZoneId.of("UTC"));
+        List<MeterReading> readings = meterReadingRepository.getMeterReadingsForInterval(meterId, start, end);
+        return mapToMeterReadingQueryDTOs(readings);
+
+    }
     
+    // Could this theoretically be a domain service?
+    private ZonedDateTime convertToDateFormat(String readingTime) {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssXXX");
+        return ZonedDateTime.parse(readingTime, dateTimeFormatter);
+    }
+
+    private List<MeterReadingQueryDTO> mapToMeterReadingQueryDTOs(List<MeterReading> readings) {
+        return readings.stream().map(reading ->
+            MeterReadingQueryDTO.builder()
+                .id(reading.getId())
+                .readingTime(reading.getReadingTime().toString())
+                .meterId(reading.getMeterIndividualId())
+                .propertyValues(mapToPropDTOs(reading.getPropertyValues()))
+                .build()     
+        ).collect(Collectors.toList());
+    }
+
+    private MeterReadingPropDTO[] mapToPropDTOs(List<PropertyValue> propertyValues) {
+        return propertyValues.stream().map(prop -> 
+             MeterReadingPropDTO.builder()
+                .operationalPropertyDef(prop.getOperationalPropertyDefId())
+                .value(prop.getNumericalValue())
+                .unit(prop.getUnit().getLabel())
+                .build()
+        ).collect(Collectors.toList()).toArray(new MeterReadingPropDTO[0]);
+    } 
+
+
 }
