@@ -1,16 +1,14 @@
 package at.fhv.se.smartmeter.application.port.outbound.persistence;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 
-import at.fhv.se.smartmeter.model.MeterReading;
+import at.fhv.se.smartmeter.domain.model.MeterReading;
 
-/**
- * @author Justin Ströhle
- * 23.11.2023
- */
 
- // outbonnd port
 public interface MeterReadingRepository {
-    void save(MeterReading mr);
+    String nextIdentity();
+    String save(MeterReading mr);
     List<MeterReading> getAllMeterReadings();
+    List<MeterReading> getMeterReadingsForInterval(String meterId, ZonedDateTime start, ZonedDateTime end);
 }
