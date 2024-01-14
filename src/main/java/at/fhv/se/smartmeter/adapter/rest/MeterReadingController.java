@@ -20,6 +20,7 @@ public class MeterReadingController {
     @Autowired
     private GetMeterReadingForIntervalUseCase serviceForInterval;
 
+    //TODO: How to pass Timezone info?
     @GetMapping(path = "/forInterval")
     public List<MeterReadingQueryDTO> getMeterReadings(
             @RequestParam String meterId,

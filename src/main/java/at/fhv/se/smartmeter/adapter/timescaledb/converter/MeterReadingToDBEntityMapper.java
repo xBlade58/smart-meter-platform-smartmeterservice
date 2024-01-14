@@ -12,7 +12,7 @@ import at.fhv.se.smartmeter.domain.model.PropertyValue;
 import at.fhv.se.smartmeter.domain.model.Unit;
 
 @Component
-public class Converter {
+public class MeterReadingToDBEntityMapper {
 
     public PropertyValueDBValue mapToPropertyValueDBValue(PropertyValue v) {
         return new PropertyValueDBValue(v.getUnit().getLabel(), v.getDate(), v.getNumericalValue(), v.getOperationalPropertyDefId());

@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import at.fhv.se.smartmeter.adapter.timescaledb.converter.Converter;
+import at.fhv.se.smartmeter.adapter.timescaledb.converter.MeterReadingToDBEntityMapper;
 import at.fhv.se.smartmeter.adapter.timescaledb.jpaRepos.TimescaleJPAMeter;
 import at.fhv.se.smartmeter.adapter.timescaledb.jpaRepos.TimescaleJPAMeterReading;
 import at.fhv.se.smartmeter.adapter.timescaledb.mapper.MeterDBEntity;
@@ -28,7 +28,7 @@ public class TimescaleMeterReadingRepository implements MeterReadingRepository {
     private TimescaleJPAMeter meterJpa;
     
     @Autowired
-    private Converter converter;
+    private MeterReadingToDBEntityMapper converter;
 
     @Override
     public String nextIdentity() {
