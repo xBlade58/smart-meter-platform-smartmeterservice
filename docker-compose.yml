@@ -47,6 +47,21 @@ services:
         aliases:
           - timescaledb
 
+  redis:
+    hostname: redis
+    image: "redis:alpine"
+    ports:
+      - "6379:6379"
+
+  redisinsight:
+    image: "redislabs/redisinsight:latest"
+    depends_on:
+      - redis
+    environment:
+      - REDIS_HOSTS=redis:redis
+    ports:
+      - "8001:8001"
+
 networks:
   my-bridge-network:
     driver: bridge

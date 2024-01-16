@@ -6,6 +6,7 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import at.fhv.se.smartmeter.adapter.redis.RedisClient;
 import at.fhv.se.smartmeter.adapter.timescaledb.jpaRepos.TimescaleJPAMeter;
 import at.fhv.se.smartmeter.adapter.timescaledb.jpaRepos.TimescaleJPAPhysicalMeter;
 import at.fhv.se.smartmeter.adapter.timescaledb.model.MeterDBEntity;
@@ -21,7 +22,7 @@ public class TimescaleMeterRepository implements MeterRepository {
 
     @Autowired 
     private TimescaleJPAPhysicalMeter physicalMeterJpa;
-    
+
 
     @Override
     public String save(MeterIndividual meter) {

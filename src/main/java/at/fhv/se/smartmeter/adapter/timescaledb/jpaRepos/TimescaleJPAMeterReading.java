@@ -1,7 +1,6 @@
 package at.fhv.se.smartmeter.adapter.timescaledb.jpaRepos;
 
 
-import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.UUID;
