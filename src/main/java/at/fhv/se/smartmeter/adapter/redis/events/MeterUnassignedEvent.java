@@ -11,11 +11,16 @@ public class MeterUnassignedEvent extends HouseholdEvent {
         this.meterId = meterId;
     }
 
+    @Override
+    public void accept(EventVisitor visitor) {
+        visitor.visit(this);
+    }
+
     public String getMeterId() {
         return meterId;
     }
 
-    
+    private MeterUnassignedEvent() {}    
 
     
 }

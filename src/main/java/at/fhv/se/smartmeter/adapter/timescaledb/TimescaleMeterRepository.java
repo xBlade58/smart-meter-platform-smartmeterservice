@@ -6,12 +6,12 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import at.fhv.se.smartmeter.adapter.redis.RedisClient;
 import at.fhv.se.smartmeter.adapter.timescaledb.jpaRepos.TimescaleJPAMeter;
 import at.fhv.se.smartmeter.adapter.timescaledb.jpaRepos.TimescaleJPAPhysicalMeter;
 import at.fhv.se.smartmeter.adapter.timescaledb.model.MeterDBEntity;
 import at.fhv.se.smartmeter.adapter.timescaledb.model.PhysicalMeterDBEntity;
 import at.fhv.se.smartmeter.application.port.outbound.persistence.MeterRepository;
+import at.fhv.se.smartmeter.domain.model.Household;
 import at.fhv.se.smartmeter.domain.model.MeterIndividual;
 
 @Repository
@@ -42,6 +42,13 @@ public class TimescaleMeterRepository implements MeterRepository {
     @Override
     public boolean existsById(String id) {
         return meterJpa.existsById(UUID.fromString(id));
+    }
+
+
+    @Override
+    public void assignHouseholdToMeter(String meterId, Household household) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'assignHouseholdToMeter'");
     }
 
 }

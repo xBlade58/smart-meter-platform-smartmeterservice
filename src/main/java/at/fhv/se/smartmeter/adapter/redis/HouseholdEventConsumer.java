@@ -2,6 +2,25 @@ package at.fhv.se.smartmeter.adapter.redis;
 
 import java.time.Duration;
 
+import org.springframework.beans.factory.DisposableBean;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.connection.stream.Consumer;
+import org.springframework.data.redis.connection.stream.MapRecord;
+import org.springframework.data.redis.connection.stream.ReadOffset;
+import org.springframework.data.redis.connection.stream.StreamOffset;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.stream.StreamListener;
+import org.springframework.data.redis.stream.StreamMessageListenerContainer;
+import org.springframework.data.redis.stream.StreamMessageListenerContainer.StreamMessageListenerContainerOptions;
+import org.springframework.data.redis.stream.Subscription;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.stereotype.Component;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+
+import at.fhv.se.smartmeter.adapter.redis.events.HouseholdEvent;
 import io.lettuce.core.api.async.RedisAsyncCommands;
 import io.lettuce.core.codec.StringCodec;
 import io.lettuce.core.output.StatusOutput;
@@ -9,48 +28,38 @@ import io.lettuce.core.protocol.CommandArgs;
 import io.lettuce.core.protocol.CommandKeyword;
 import io.lettuce.core.protocol.CommandType;
 
-import org.springframework.beans.factory.DisposableBean;
-import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.connection.stream.Consumer;
-import org.springframework.data.redis.connection.stream.MapRecord;
-import org.springframework.data.redis.connection.stream.ReadOffset;
-import org.springframework.data.redis.connection.stream.StreamOffset;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.serializer.JdkSerializationRedisSerializer;
-import org.springframework.data.redis.stream.StreamListener;
-import org.springframework.data.redis.stream.StreamMessageListenerContainer;
-import org.springframework.data.redis.stream.Subscription;
-import org.springframework.data.redis.stream.StreamMessageListenerContainer.StreamMessageListenerContainerOptions;
-import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.stereotype.Component;
-
-import at.fhv.se.smartmeter.adapter.redis.events.HouseholdEvent;
-
 @Component
 @EnableScheduling
-public class EventStreamListener implements StreamListener<String, MapRecord<String, String, String>>, 
+public class HouseholdEventConsumer implements StreamListener<String, MapRecord<String, String, String>>, 
     InitializingBean, DisposableBean {
 
     @Autowired
     private RedisTemplate<String, HouseholdEvent> redisTemplate;
 
+    @Autowired
+    private HouseholdEventHandler eventHanlder;
+
+    @Value("${redis.consumer-name}")
+    private String consumerName = "test";
+
+    @Value("${redis.consumer-group-name}")
+    private String consumerGroupName;
+    
+    @Value("${redis.stream-name}")
+    private String streamName;
 
     private StreamMessageListenerContainer<String, MapRecord<String, String, String>> listenerContainer;
     private Subscription subscription;
-    private String consumerName = "test";
-    private String consumerGroupName = "test-group";
-    private String streamName = "household";
 
     @Override
     public void onMessage(MapRecord<String, String, String> message) {
         
-        System.out.println("MessageId: " + message.getId());
-		System.out.println("Stream: " + message.getStream());
-		System.out.println("Body: " + message.getValue());
-
-        
-
+        try {
+            eventHanlder.handle(message.getValue());
+        } catch (JsonProcessingException | IllegalArgumentException e) {
+           // e.printStackTrace();
+            System.out.println("Could not parse to HouseholdEvent. Skipping message with id: " + message.getId());
+        }
         redisTemplate.opsForStream().acknowledge(consumerGroupName, message);
     }
 
