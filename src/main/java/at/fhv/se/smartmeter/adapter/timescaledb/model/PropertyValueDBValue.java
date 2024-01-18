@@ -1,4 +1,4 @@
-package at.fhv.se.smartmeter.adapter.timescaledb.mapper;
+package at.fhv.se.smartmeter.adapter.timescaledb.model;
 
 import java.io.Serializable;
 import java.time.ZonedDateTime;

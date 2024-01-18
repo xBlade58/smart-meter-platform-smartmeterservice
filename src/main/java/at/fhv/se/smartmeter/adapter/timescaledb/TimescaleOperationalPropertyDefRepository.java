@@ -1,12 +1,12 @@
 package at.fhv.se.smartmeter.adapter.timescaledb;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Repository;
 
 import at.fhv.se.smartmeter.adapter.timescaledb.jpaRepos.TimescaleJPAOperationalPropertyDef;
 import at.fhv.se.smartmeter.application.port.outbound.persistence.OperationalPropertyDefRepository;
 
-@Service
+@Repository
 public class TimescaleOperationalPropertyDefRepository implements OperationalPropertyDefRepository {
 
     @Autowired

@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import at.fhv.se.smartmeter.application.dto.MeterReadingDTO;
 import at.fhv.se.smartmeter.application.dto.MeterReadingPropDTO;
 import at.fhv.se.smartmeter.application.dto.MeterReadingQueryDTO;
 import at.fhv.se.smartmeter.domain.model.MeterReading;

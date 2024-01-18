@@ -9,12 +9,12 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import at.fhv.se.smartmeter.adapter.timescaledb.converter.MeterReadingToDBEntityMapper;
 import at.fhv.se.smartmeter.adapter.timescaledb.jpaRepos.TimescaleJPAMeter;
 import at.fhv.se.smartmeter.adapter.timescaledb.jpaRepos.TimescaleJPAMeterReading;
-import at.fhv.se.smartmeter.adapter.timescaledb.mapper.MeterDBEntity;
-import at.fhv.se.smartmeter.adapter.timescaledb.mapper.MeterReadingDBEntity;
-import at.fhv.se.smartmeter.adapter.timescaledb.mapper.PropertyValueDBValue;
+import at.fhv.se.smartmeter.adapter.timescaledb.mapper.MeterReadingToDBEntityMapper;
+import at.fhv.se.smartmeter.adapter.timescaledb.model.MeterDBEntity;
+import at.fhv.se.smartmeter.adapter.timescaledb.model.MeterReadingDBEntity;
+import at.fhv.se.smartmeter.adapter.timescaledb.model.PropertyValueDBValue;
 import at.fhv.se.smartmeter.application.port.outbound.persistence.MeterReadingRepository;
 import at.fhv.se.smartmeter.domain.model.MeterReading;
 

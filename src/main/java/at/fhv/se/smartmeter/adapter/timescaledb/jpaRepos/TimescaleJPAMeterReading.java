@@ -1,7 +1,6 @@
 package at.fhv.se.smartmeter.adapter.timescaledb.jpaRepos;
 
 
-import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.UUID;
@@ -10,7 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import at.fhv.se.smartmeter.adapter.timescaledb.mapper.MeterReadingDBEntity;
+import at.fhv.se.smartmeter.adapter.timescaledb.model.MeterReadingDBEntity;
 
 public interface TimescaleJPAMeterReading extends JpaRepository<MeterReadingDBEntity, UUID> {
     
