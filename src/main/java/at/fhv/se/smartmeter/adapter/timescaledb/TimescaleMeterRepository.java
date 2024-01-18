@@ -1,5 +1,6 @@
 package at.fhv.se.smartmeter.adapter.timescaledb;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -13,7 +14,6 @@ import at.fhv.se.smartmeter.adapter.timescaledb.model.MeterDBEntity;
 import at.fhv.se.smartmeter.adapter.timescaledb.model.PhysicalMeterDBEntity;
 import at.fhv.se.smartmeter.application.port.outbound.persistence.MeterRepository;
 import at.fhv.se.smartmeter.domain.model.MeterIndividual;
-import jakarta.transaction.Transactional;
 
 @Repository
 public class TimescaleMeterRepository implements MeterRepository {
@@ -72,6 +72,17 @@ public class TimescaleMeterRepository implements MeterRepository {
         }
         MeterIndividual meter = mapper.mapToMeter(entityOpt.get());
         return Optional.of(meter);
+    }
+
+
+    @Override
+    public Optional<String> fetchMeterIdForHouseholdId(String householdId) {
+        List<MeterDBEntity> meters = meterJpa.findByHouseholdId(householdId);
+        if (meters.size() > 0) {
+            return Optional.of(meters.get(0).getId().toString()); //TODO: add note
+        } else {
+            return Optional.empty();
+        }
     }
 
 

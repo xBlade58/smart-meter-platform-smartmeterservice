@@ -5,7 +5,9 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,9 +15,11 @@ import org.springframework.stereotype.Service;
 import at.fhv.se.smartmeter.application.dto.MeterReadingDTO;
 import at.fhv.se.smartmeter.application.dto.MeterReadingPropDTO;
 import at.fhv.se.smartmeter.application.dto.MeterReadingQueryDTO;
+import at.fhv.se.smartmeter.application.exceptions.NoMeterForHouseholdException;
 import at.fhv.se.smartmeter.application.port.inbound.meterReading.CreateMeterReadingUseCase;
 import at.fhv.se.smartmeter.application.port.inbound.meterReading.GetMeterReadingForIntervalUseCase;
 import at.fhv.se.smartmeter.application.port.outbound.persistence.MeterReadingRepository;
+import at.fhv.se.smartmeter.application.port.outbound.persistence.MeterRepository;
 import at.fhv.se.smartmeter.application.port.outbound.persistence.OperationalPropertyDefRepository;
 import at.fhv.se.smartmeter.domain.model.MeterReading;
 import at.fhv.se.smartmeter.domain.model.PropertyValue;
@@ -28,11 +32,17 @@ public class MeterReadingService implements CreateMeterReadingUseCase, GetMeterR
     private final MeterReadingRepository meterReadingRepository;
 
     @Autowired
+    private final MeterRepository meterRepository;
+
+    @Autowired
     private final OperationalPropertyDefRepository propertyDefRepo;
 
 
-    public MeterReadingService(MeterReadingRepository meterReadingRepository, OperationalPropertyDefRepository propertyDefRepo) {
+    public MeterReadingService(MeterReadingRepository meterReadingRepository, 
+        OperationalPropertyDefRepository propertyDefRepo,
+        MeterRepository meterRepository) {
         this.meterReadingRepository = meterReadingRepository;
+        this.meterRepository = meterRepository;
         this.propertyDefRepo = propertyDefRepo;
     }
 
@@ -59,10 +69,19 @@ public class MeterReadingService implements CreateMeterReadingUseCase, GetMeterR
 
     @Transactional
     @Override
-    public List<MeterReadingQueryDTO> getMeterReadingsForInterval(String meterId, String startDate, String endDate) {
+    public List<MeterReadingQueryDTO> getMeterReadingsForInterval(String householdId, String startDate, String endDate) throws NoMeterForHouseholdException {
+        
+        Optional<String> meterIdOpt = meterRepository.fetchMeterIdForHouseholdId(householdId);
+        if (!meterIdOpt.isPresent()) {
+            throw new NoMeterForHouseholdException(householdId);
+        }
+        
         ZonedDateTime start = LocalDateTime.parse(startDate, DateTimeFormatter.ISO_DATE_TIME).atZone(ZoneId.of("UTC"));
         ZonedDateTime end = LocalDateTime.parse(endDate, DateTimeFormatter.ISO_DATE_TIME).atZone(ZoneId.of("UTC"));
-        List<MeterReading> readings = meterReadingRepository.getMeterReadingsForInterval(meterId, start, end);
+
+
+        List<MeterReading> readings = meterReadingRepository.getMeterReadingsForInterval(meterIdOpt.get(), start, end);
+        
         return MeterReadingToDTOMapper.mapToMeterReadingQueryDTOs(readings);
 
     }
