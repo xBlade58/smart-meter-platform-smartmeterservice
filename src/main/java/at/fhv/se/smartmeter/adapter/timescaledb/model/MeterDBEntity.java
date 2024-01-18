@@ -22,7 +22,8 @@ public class MeterDBEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "physical_meter_id")
     private PhysicalMeterDBEntity physicalMeter;
-
+    
+    private String householdId;
 
     public MeterDBEntity(String serialNumber) {
         this.serialNumber = serialNumber;
@@ -66,9 +67,13 @@ public class MeterDBEntity {
         this.physicalMeter = physicalMeter;
     }
 
+    public String getHouseholdId() {
+        return householdId;
+    }
 
-
-
+    public void setHouseholdId(String householdId) {
+        this.householdId = householdId;
+    }
   
 
 }

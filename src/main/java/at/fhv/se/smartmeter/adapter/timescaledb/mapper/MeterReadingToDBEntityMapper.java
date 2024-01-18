@@ -1,4 +1,4 @@
-package at.fhv.se.smartmeter.adapter.timescaledb.converter;
+package at.fhv.se.smartmeter.adapter.timescaledb.mapper;
 
 import java.util.List;
 import java.util.stream.Collectors;
