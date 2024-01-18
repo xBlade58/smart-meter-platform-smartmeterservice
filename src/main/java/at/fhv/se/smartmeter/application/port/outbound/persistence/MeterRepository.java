@@ -10,5 +10,6 @@ public interface MeterRepository {
     boolean existsById(String id);
     Optional<MeterIndividual> fetchMeterById(String id);
     void assignHouseholdToMeter(String meterId, String householdId);
-    void unassignHouseholdFromMeter(String meterId);   
+    void unassignHouseholdFromMeter(String meterId);
+    Optional<String> fetchMeterIdForHouseholdId(String householdId);   
 }
