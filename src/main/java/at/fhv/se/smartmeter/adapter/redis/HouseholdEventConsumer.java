@@ -57,7 +57,7 @@ public class HouseholdEventConsumer implements StreamListener<String, MapRecord<
         try {
             eventHanlder.handle(message.getValue());
         } catch (JsonProcessingException | IllegalArgumentException e) {
-           // e.printStackTrace();
+            e.printStackTrace();
             System.out.println("Could not parse to HouseholdEvent. Skipping message with id: " + message.getId());
         }
         redisTemplate.opsForStream().acknowledge(consumerGroupName, message);

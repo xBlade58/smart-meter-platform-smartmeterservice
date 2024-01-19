@@ -2,6 +2,7 @@ package at.fhv.se.smartmeter.adapter.redis.events;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
@@ -11,14 +12,16 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
         @JsonSubTypes.Type(value = MeterAssignedEvent.class, name = "MeterAssignedEvent"),
         @JsonSubTypes.Type(value = MeterUnassignedEvent.class, name = "MeterUnassignedEvent")
 })
+@JsonIgnoreProperties(ignoreUnknown = true)
 public abstract class HouseholdEvent {
     
-    private Long id;
+    private String id;
     protected String eventType;
     protected String entityId;
     protected LocalDateTime timestamp;
 
-    public HouseholdEvent(String entityId, LocalDateTime timestamp) {
+    public HouseholdEvent(String id, String entityId, LocalDateTime timestamp) {
+        this.id = id;
         this.eventType = this.getClass().getSimpleName();
         this.entityId = entityId;
         this.timestamp = timestamp;
@@ -26,7 +29,7 @@ public abstract class HouseholdEvent {
 
     public abstract void accept(EventVisitor visitor);
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
@@ -37,7 +40,7 @@ public abstract class HouseholdEvent {
         return timestamp;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

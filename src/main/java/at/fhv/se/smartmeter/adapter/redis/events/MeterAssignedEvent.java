@@ -6,8 +6,8 @@ public class MeterAssignedEvent extends HouseholdEvent {
     
     private String meterId;
 
-    public MeterAssignedEvent(String entityId, LocalDateTime timestamp, String meterId) {
-        super(entityId, timestamp);
+    public MeterAssignedEvent(String id, String entityId, LocalDateTime timestamp, String meterId) {
+        super(id, entityId, timestamp);
         this.meterId = meterId;
     }
 
