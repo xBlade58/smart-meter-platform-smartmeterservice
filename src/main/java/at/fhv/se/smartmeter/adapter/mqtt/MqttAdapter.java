@@ -15,7 +15,7 @@ import org.springframework.messaging.MessageHandler;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
-import at.fhv.se.smartmeter.application.dto.MeterReadingDTO;
+import at.fhv.se.smartmeter.application.dto.CreateMeterReadingDTO;
 import at.fhv.se.smartmeter.application.port.inbound.meterReading.CreateMeterReadingUseCase;
 
 @Configuration
@@ -73,7 +73,7 @@ public class MqttAdapter {
     @ServiceActivator(inputChannel = "mqttInputChannel")
     public MessageHandler handler() {
         return (message) -> {
-            MeterReadingDTO dto;
+            CreateMeterReadingDTO dto;
             try {
                 dto = parser.parse(message);
                 createMeterReadingUseCase.createMeterReading(dto);

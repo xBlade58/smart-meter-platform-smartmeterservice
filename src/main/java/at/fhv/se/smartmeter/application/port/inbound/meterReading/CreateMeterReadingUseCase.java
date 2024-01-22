@@ -1,7 +1,7 @@
 package at.fhv.se.smartmeter.application.port.inbound.meterReading;
 
-import at.fhv.se.smartmeter.application.dto.MeterReadingDTO;
+import at.fhv.se.smartmeter.application.dto.CreateMeterReadingDTO;
 
 public interface CreateMeterReadingUseCase {
-    String createMeterReading(MeterReadingDTO meterReadingDTO);
+    String createMeterReading(CreateMeterReadingDTO meterReadingDTO);
 }

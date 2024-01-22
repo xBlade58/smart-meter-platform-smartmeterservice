@@ -9,7 +9,7 @@ import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
 
-import at.fhv.se.smartmeter.domain.model.MeterReading;
+import at.fhv.se.smartmeter.domain.MeterReading;
 
 public class MeterReadingTests {
     /*

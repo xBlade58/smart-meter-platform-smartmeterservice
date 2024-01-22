@@ -10,12 +10,12 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import at.fhv.se.smartmeter.application.dto.MeterReadingDTO;
+import at.fhv.se.smartmeter.application.dto.CreateMeterReadingDTO;
 import at.fhv.se.smartmeter.application.dto.MeterReadingPropDTO;
 
 @Service
 public class Parser {
-    public MeterReadingDTO parse(Message<?> msg) throws JsonMappingException, JsonProcessingException {
+    public CreateMeterReadingDTO parse(Message<?> msg) throws JsonMappingException, JsonProcessingException {
         Object payload = msg.getPayload();
         ObjectMapper mapper = new ObjectMapper();
         JsonNode node = mapper.readTree(payload.toString());
@@ -34,7 +34,7 @@ public class Parser {
                 .unit(propNode.get("unit").asText()).build());
         }
         
-        MeterReadingDTO dto = MeterReadingDTO. builder()
+        CreateMeterReadingDTO dto = CreateMeterReadingDTO. builder()
             .readingTime(node.get("readingTime").asText())
             .meterId(node.get("meterId").asText())
             .propertyValues(arrList.toArray(new MeterReadingPropDTO[0]))

@@ -2,7 +2,7 @@ package at.fhv.se.smartmeter.adapter.timescaledb.model;
 
 import java.util.UUID;
 
-import at.fhv.se.smartmeter.domain.model.MeterClass;
+import at.fhv.se.smartmeter.domain.MeterClass;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;

@@ -13,7 +13,7 @@ import at.fhv.se.smartmeter.adapter.timescaledb.mapper.MeterIndividualToDBEntity
 import at.fhv.se.smartmeter.adapter.timescaledb.model.MeterDBEntity;
 import at.fhv.se.smartmeter.adapter.timescaledb.model.PhysicalMeterDBEntity;
 import at.fhv.se.smartmeter.application.port.outbound.persistence.MeterRepository;
-import at.fhv.se.smartmeter.domain.model.MeterIndividual;
+import at.fhv.se.smartmeter.domain.MeterIndividual;
 
 @Repository
 public class TimescaleMeterRepository implements MeterRepository {

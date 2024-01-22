@@ -2,7 +2,7 @@ package at.fhv.se.smartmeter.application.port.outbound.persistence;
 
 import java.util.Optional;
 
-import at.fhv.se.smartmeter.domain.model.MeterIndividual;
+import at.fhv.se.smartmeter.domain.MeterIndividual;
 
 
 public interface MeterRepository {

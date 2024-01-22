@@ -1,4 +1,4 @@
-package at.fhv.se.smartmeter.domain.model;
+package at.fhv.se.smartmeter.domain;
 
 public class PhysicalMeter {
     

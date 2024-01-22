@@ -1,4 +1,4 @@
-package at.fhv.se.smartmeter.application.meterReading;
+package at.fhv.se.smartmeter.application.service.meterReading;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -12,7 +12,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import at.fhv.se.smartmeter.application.dto.MeterReadingDTO;
+import at.fhv.se.smartmeter.application.dto.CreateMeterReadingDTO;
 import at.fhv.se.smartmeter.application.dto.MeterReadingPropDTO;
 import at.fhv.se.smartmeter.application.dto.MeterReadingQueryDTO;
 import at.fhv.se.smartmeter.application.exceptions.NoMeterForHouseholdException;
@@ -21,8 +21,8 @@ import at.fhv.se.smartmeter.application.port.inbound.meterReading.GetMeterReadin
 import at.fhv.se.smartmeter.application.port.outbound.persistence.MeterReadingRepository;
 import at.fhv.se.smartmeter.application.port.outbound.persistence.MeterRepository;
 import at.fhv.se.smartmeter.application.port.outbound.persistence.OperationalPropertyDefRepository;
-import at.fhv.se.smartmeter.domain.model.MeterReading;
-import at.fhv.se.smartmeter.domain.model.PropertyValue;
+import at.fhv.se.smartmeter.domain.MeterReading;
+import at.fhv.se.smartmeter.domain.PropertyValue;
 import jakarta.transaction.Transactional;
 
 @Service
@@ -49,7 +49,7 @@ public class MeterReadingService implements CreateMeterReadingUseCase, GetMeterR
 
     @Transactional
     @Override
-    public String createMeterReading(MeterReadingDTO meterReadingDTO) {
+    public String createMeterReading(CreateMeterReadingDTO meterReadingDTO) {
         
         //TODO: verify if Meter exists necessary?
         /*
