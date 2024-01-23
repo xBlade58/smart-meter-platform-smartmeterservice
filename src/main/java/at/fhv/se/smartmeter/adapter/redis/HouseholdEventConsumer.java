@@ -10,6 +10,7 @@ import org.springframework.data.redis.connection.stream.Consumer;
 import org.springframework.data.redis.connection.stream.MapRecord;
 import org.springframework.data.redis.connection.stream.ReadOffset;
 import org.springframework.data.redis.connection.stream.StreamOffset;
+import org.springframework.data.redis.core.ReactiveRedisTemplate;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.stream.StreamListener;
 import org.springframework.data.redis.stream.StreamMessageListenerContainer;
@@ -28,6 +29,7 @@ import io.lettuce.core.protocol.CommandArgs;
 import io.lettuce.core.protocol.CommandKeyword;
 import io.lettuce.core.protocol.CommandType;
 
+
 @Component
 @EnableScheduling
 public class HouseholdEventConsumer implements StreamListener<String, MapRecord<String, String, String>>, 
@@ -35,6 +37,7 @@ public class HouseholdEventConsumer implements StreamListener<String, MapRecord<
 
     @Autowired
     private RedisTemplate<String, HouseholdEvent> redisTemplate;
+
 
     @Autowired
     private HouseholdEventHandler eventHanlder;
@@ -51,8 +54,10 @@ public class HouseholdEventConsumer implements StreamListener<String, MapRecord<
     private StreamMessageListenerContainer<String, MapRecord<String, String, String>> listenerContainer;
     private Subscription subscription;
 
+
     @Override
     public void onMessage(MapRecord<String, String, String> message) {
+        
         
         try {
             eventHanlder.handle(message.getValue());
@@ -65,9 +70,11 @@ public class HouseholdEventConsumer implements StreamListener<String, MapRecord<
 
     @Override
     public void afterPropertiesSet() throws Exception {
+
         try {
             //create consumer group for the stream
             // if stream does not exist it will create stream first then create consumer group
+
             if (!redisTemplate.hasKey(streamName)) {
                 System.out.println(streamName + " does not exist. Creating stream along with the consumer group");
                 RedisAsyncCommands commands = (RedisAsyncCommands) redisTemplate.getConnectionFactory()
@@ -86,6 +93,7 @@ public class HouseholdEventConsumer implements StreamListener<String, MapRecord<
         } catch (Exception ex) {
             System.out.println("Consumer group already present for stream name: " + streamName);
         }
+
 
         StreamMessageListenerContainerOptions<String, MapRecord<String, String, String>> containerOptions = StreamMessageListenerContainerOptions
                     .builder().pollTimeout(Duration.ofMillis(100)).build();
