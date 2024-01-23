@@ -1,5 +1,8 @@
 package at.fhv.se.smartmeter.adapter.timescaledb.model;
 
+import jakarta.persistence.Embeddable;
+
+@Embeddable
 public enum Unit {
     A("Amperes"),
     V("Volts"),
