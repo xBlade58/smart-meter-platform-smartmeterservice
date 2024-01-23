@@ -79,7 +79,7 @@ public class TimescaleMeterRepository implements MeterRepository {
     public Optional<String> fetchMeterIdForHouseholdId(String householdId) {
         List<MeterDBEntity> meters = meterJpa.findByHouseholdId(householdId);
         if (meters.size() > 0) {
-            return Optional.of(meters.get(0).getId().toString()); //TODO: add note
+            return Optional.of(meters.get(0).getId().toString());
         } else {
             return Optional.empty();
         }

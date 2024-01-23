@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>at.fhv.se</groupId>
-	<artifactId>smartmeter</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<artifactId>smartmeter-service</artifactId>
+	<version>1.0.0</version>
 	<name>smartmeter</name>
-	<description>Cloud for smart meter platform</description>
+	<description>Smartmeter Microservice</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
