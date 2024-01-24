@@ -15,7 +15,8 @@ import org.springframework.messaging.MessageHandler;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
-import at.fhv.se.smartmeter.application.dto.MeterReadingDTO;
+import at.fhv.se.smartmeter.application.dto.CreateMeterReadingDTO;
+import at.fhv.se.smartmeter.application.exceptions.OperationalPropertyNotFoundException;
 import at.fhv.se.smartmeter.application.port.inbound.meterReading.CreateMeterReadingUseCase;
 
 @Configuration
@@ -48,7 +49,7 @@ public class MqttAdapter {
         String [] arr = new String[1];
         arr[0] = brokerUrl;
         factory.getConnectionOptions().setServerURIs(arr);
-        //factory.getConnectionOptions().setSocketFactory(SocketFactoryUtil.createSocketFactory(trustStore, trustStorePassword));
+        //factory.getConnectionOptions().setSocketFactory(SocketFactoryUtil.createSocketFactory(trustStore, trustStorePassword)); --> only need for MQTTS
         return factory;
     }
     
@@ -73,13 +74,17 @@ public class MqttAdapter {
     @ServiceActivator(inputChannel = "mqttInputChannel")
     public MessageHandler handler() {
         return (message) -> {
-            MeterReadingDTO dto;
+            CreateMeterReadingDTO dto;
             try {
                 dto = parser.parse(message);
                 createMeterReadingUseCase.createMeterReading(dto);
             } catch (JsonProcessingException e) {
                 e.printStackTrace();
-                System.out.println("Skipping Message because of invalid format.");
+                System.out.println("Skipping message because of invalid format.");
+            } catch (OperationalPropertyNotFoundException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+                System.out.println("Skipping message because of invalid operational property");
             }
             
         };

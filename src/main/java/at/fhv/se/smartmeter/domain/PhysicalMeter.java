@@ -1,4 +1,4 @@
-package at.fhv.se.smartmeter.domain.model;
+package at.fhv.se.smartmeter.domain;
 
 public class PhysicalMeter {
     
@@ -6,7 +6,6 @@ public class PhysicalMeter {
     private String name; // Kaifa
     private String version; // MA309M
     private MeterClass meterClass; // ELECTRICITY
-    //TODO add List<OperationalPropertyDef>
 
     public PhysicalMeter(String id, String name, String version, MeterClass meterClass) {
         this.id = id;

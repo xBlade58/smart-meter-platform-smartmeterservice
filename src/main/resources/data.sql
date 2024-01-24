@@ -1,7 +1,7 @@
 -- Enable the uuid-ossp extension
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
--- Inserting sample data into the physical_meter table
+-- Inserting sample data fpr physical meter
 INSERT INTO physical_meter (id, name, version, meter_class)
 VALUES
   ('f47ac10b-58cc-4372-a567-0e02b2c3d479', 'Kaifa Meter 1', 'MA309M', 'ELECTRICITY'),
@@ -10,6 +10,39 @@ VALUES
 -- Sample Meter entries
 INSERT INTO meter (id, serial_number, physical_meter_id, household_id) VALUES ('b52ac10f-58cc-6172-a567-0e02b2c3d479', 'SN123456', 'f47ac10b-58cc-4372-a567-0e02b2c3d479', '1');
 INSERT INTO meter (id, serial_number, physical_meter_id, household_id) VALUES ('bf17c6a0-82ce-4214-adbd-5a7e4ecdb0ff', 'SN188191', 'f47ac10b-58cc-4372-a567-0e02b2c3d479', '2');
+
+
+-- Insert test data for operational property definitions
+INSERT INTO property_def (id, name) VALUES 
+  ('1.7.0', 'Positive active instantaneous power'),
+  ('1.8.0', 'Positive active energy total'),
+  ('2.7.0', 'Negative active instantaneous power'),
+  ('2.8.0', 'Negative active energy total'),
+  ('3.8.0', 'Positive reactive energy total'),
+  ('4.8.0', 'Negative reactive energy total'),
+  ('16.7.0', 'Sum active instantaneous power'),
+  ('31.7.0', 'Instantaneous current in phase L1'),
+  ('32.7.0', 'Instantaneous voltage in phase L1'),
+  ('51.7.0', 'Instantaneous current in phase L2'),
+  ('52.7.0', 'Instantaneous voltage in phase L2'),
+  ('71.7.0', 'Instantaneous current in phase L3'),
+  ('72.7.0', 'Instantaneous voltage in phase L3');
+
+-- Insert test data for allowed units
+INSERT INTO property_def_allowed_units (allowed_units_order, operational_property_defdbentity_id, label) VALUES
+  (1, '1.7.0', 'kW'),
+  (2, '1.8.0', 'kWh'),
+  (3, '2.7.0', 'kWh'),
+  (4, '2.8.0', 'kWh'),
+  (5, '3.8.0', 'kWh'),
+  (6, '4.8.0', 'kvarh'),
+  (7, '16.7.0', 'kW'),
+  (8, '31.7.0', 'A'),
+  (9, '32.7.0', 'V'),
+  (10, '51.7.0', 'A'),
+  (11, '52.7.0', 'V'),
+  (12, '71.7.0', 'A'),
+  (13, '72.7.0', 'V');
 
 
 -- Sample MeterReadings

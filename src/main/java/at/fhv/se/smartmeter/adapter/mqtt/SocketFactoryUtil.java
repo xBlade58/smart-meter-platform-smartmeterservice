@@ -6,6 +6,7 @@ import javax.net.ssl.TrustManagerFactory;
 import java.io.FileInputStream;
 import java.security.KeyStore;
 
+// Helper class for MQTTS
 public class SocketFactoryUtil {
 
     public static SSLSocketFactory createSocketFactory(String trustStorePath, String trustStorePassword) {

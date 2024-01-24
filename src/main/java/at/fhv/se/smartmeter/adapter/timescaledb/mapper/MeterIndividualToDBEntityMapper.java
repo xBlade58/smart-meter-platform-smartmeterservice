@@ -3,7 +3,7 @@ package at.fhv.se.smartmeter.adapter.timescaledb.mapper;
 import org.springframework.stereotype.Component;
 
 import at.fhv.se.smartmeter.adapter.timescaledb.model.MeterDBEntity;
-import at.fhv.se.smartmeter.domain.model.MeterIndividual;
+import at.fhv.se.smartmeter.domain.MeterIndividual;
 
 @Component
 public class MeterIndividualToDBEntityMapper {

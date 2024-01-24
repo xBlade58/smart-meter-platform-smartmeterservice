@@ -1,4 +1,4 @@
-package at.fhv.se.smartmeter.application.meterReading;
+package at.fhv.se.smartmeter.application.service.meterReading;
 
 import java.time.ZonedDateTime;
 import java.util.Arrays;
@@ -7,9 +7,9 @@ import java.util.stream.Collectors;
 
 import at.fhv.se.smartmeter.application.dto.MeterReadingPropDTO;
 import at.fhv.se.smartmeter.application.dto.MeterReadingQueryDTO;
-import at.fhv.se.smartmeter.domain.model.MeterReading;
-import at.fhv.se.smartmeter.domain.model.PropertyValue;
-import at.fhv.se.smartmeter.domain.model.Unit;
+import at.fhv.se.smartmeter.domain.MeterReading;
+import at.fhv.se.smartmeter.domain.PropertyValue;
+import at.fhv.se.smartmeter.domain.Unit;
 
 public class MeterReadingToDTOMapper {
 

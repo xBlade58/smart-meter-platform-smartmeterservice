@@ -6,7 +6,7 @@ import lombok.Getter;
 
 @Getter
 @Builder
-public class MeterReadingDTO {
+public class CreateMeterReadingDTO {
     private String readingTime;
     private String meterId;
     private MeterReadingPropDTO[] propertyValues;

@@ -7,9 +7,9 @@ import org.springframework.stereotype.Component;
 
 import at.fhv.se.smartmeter.adapter.timescaledb.model.MeterReadingDBEntity;
 import at.fhv.se.smartmeter.adapter.timescaledb.model.PropertyValueDBValue;
-import at.fhv.se.smartmeter.domain.model.MeterReading;
-import at.fhv.se.smartmeter.domain.model.PropertyValue;
-import at.fhv.se.smartmeter.domain.model.Unit;
+import at.fhv.se.smartmeter.domain.MeterReading;
+import at.fhv.se.smartmeter.domain.PropertyValue;
+import at.fhv.se.smartmeter.domain.Unit;
 
 @Component
 public class MeterReadingToDBEntityMapper {

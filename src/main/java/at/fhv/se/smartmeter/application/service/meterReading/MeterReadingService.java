@@ -1,28 +1,29 @@
-package at.fhv.se.smartmeter.application.meterReading;
+package at.fhv.se.smartmeter.application.service.meterReading;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import at.fhv.se.smartmeter.application.dto.MeterReadingDTO;
+import at.fhv.se.smartmeter.application.dto.CreateMeterReadingDTO;
 import at.fhv.se.smartmeter.application.dto.MeterReadingPropDTO;
 import at.fhv.se.smartmeter.application.dto.MeterReadingQueryDTO;
 import at.fhv.se.smartmeter.application.exceptions.NoMeterForHouseholdException;
+import at.fhv.se.smartmeter.application.exceptions.OperationalPropertyNotFoundException;
 import at.fhv.se.smartmeter.application.port.inbound.meterReading.CreateMeterReadingUseCase;
 import at.fhv.se.smartmeter.application.port.inbound.meterReading.GetMeterReadingForIntervalUseCase;
 import at.fhv.se.smartmeter.application.port.outbound.persistence.MeterReadingRepository;
 import at.fhv.se.smartmeter.application.port.outbound.persistence.MeterRepository;
 import at.fhv.se.smartmeter.application.port.outbound.persistence.OperationalPropertyDefRepository;
-import at.fhv.se.smartmeter.domain.model.MeterReading;
-import at.fhv.se.smartmeter.domain.model.PropertyValue;
+import at.fhv.se.smartmeter.domain.MeterReading;
+import at.fhv.se.smartmeter.domain.PropertyValue;
 import jakarta.transaction.Transactional;
 
 @Service
@@ -49,14 +50,9 @@ public class MeterReadingService implements CreateMeterReadingUseCase, GetMeterR
 
     @Transactional
     @Override
-    public String createMeterReading(MeterReadingDTO meterReadingDTO) {
+    public String createMeterReading(CreateMeterReadingDTO meterReadingDTO) throws OperationalPropertyNotFoundException {
         
-        //TODO: verify if Meter exists necessary?
-        /*
-        if (!checkIfAllPropsExist(propDTOs)) {
-            return  null;
-        } */
-
+        checkIfAllPropsExist(new ArrayList<>(Arrays.asList(meterReadingDTO.getPropertyValues())));
         ZonedDateTime readingTime = convertToDateFormat(meterReadingDTO.getReadingTime());
         MeterReadingPropDTO[] propDTOs = meterReadingDTO.getPropertyValues();
         List<PropertyValue> propValues = MeterReadingToDTOMapper.mapToPropertyValues(propDTOs, readingTime);
@@ -86,15 +82,18 @@ public class MeterReadingService implements CreateMeterReadingUseCase, GetMeterR
 
     }
     
-    // Could this theoretically be a domain service?
     private ZonedDateTime convertToDateFormat(String readingTime) {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssXXX");
         return ZonedDateTime.parse(readingTime, dateTimeFormatter);
     }
 
-    // TODO: clarify if this is ok
-    private boolean checkIfAllPropsExist(ArrayList<MeterReadingPropDTO> propDTOs) {
-        return propDTOs.stream().allMatch(propDto -> propertyDefRepo.existsById(propDto.getOperationalPropertyDef()));
+    private boolean checkIfAllPropsExist(ArrayList<MeterReadingPropDTO> propDTOs) throws OperationalPropertyNotFoundException {
+        for (MeterReadingPropDTO dto : propDTOs) {
+            if (!propertyDefRepo.existsById(dto.getOperationalPropertyDef())) {
+                throw new OperationalPropertyNotFoundException(dto.getOperationalPropertyDef());
+            }
+        }
+        return true;
     }
 
 
