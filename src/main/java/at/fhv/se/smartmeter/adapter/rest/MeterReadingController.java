@@ -7,6 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,6 +16,12 @@ import org.springframework.web.server.ResponseStatusException;
 import at.fhv.se.smartmeter.application.dto.MeterReadingQueryDTO;
 import at.fhv.se.smartmeter.application.exceptions.NoMeterForHouseholdException;
 import at.fhv.se.smartmeter.application.port.inbound.meterReading.GetMeterReadingForIntervalUseCase;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
 
 @RestController
@@ -24,11 +31,20 @@ public class MeterReadingController {
     @Autowired
     private GetMeterReadingForIntervalUseCase serviceForInterval;
 
-    //TODO: How to pass Timezone info?
-    @GetMapping(path = "/forInterval")
+
+    @Operation(summary = "Search for meter readings of a household within a given time interval")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Search operation was successful.", 
+            content = {@Content(mediaType = "application/json", schema = @Schema(implementation = MeterReadingQueryDTO.class))}),
+        @ApiResponse(responseCode = "404", description = "Household not found")
+    })
+
+    @GetMapping(path = "/forInterval/{householdId}")
     public ResponseEntity<List<MeterReadingQueryDTO>> getMeterReadings(
-            @RequestParam String householdId,
+            @PathVariable String householdId,
+            @Parameter(description = "Start date for the interval", required = true, schema = @Schema(type = "string", format = "date-time"))
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) String startDate,
+            @Parameter(description = "End date for the interval", required = true, schema = @Schema(type = "string", format = "date-time"))
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) String endDate
     ) {
         try {
