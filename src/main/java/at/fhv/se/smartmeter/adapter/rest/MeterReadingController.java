@@ -38,7 +38,6 @@ public class MeterReadingController {
             content = {@Content(mediaType = "application/json", schema = @Schema(implementation = MeterReadingQueryDTO.class))}),
         @ApiResponse(responseCode = "404", description = "Household not found")
     })
-
     @GetMapping(path = "/forInterval/{householdId}")
     public ResponseEntity<List<MeterReadingQueryDTO>> getMeterReadings(
             @PathVariable String householdId,
